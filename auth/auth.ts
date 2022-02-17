@@ -44,6 +44,7 @@ export class BearerAuthAuthentication implements SecurityAuthentication {
 
 
 export type AuthMethods = {
+    "default"?: SecurityAuthentication,
     "bearerAuth"?: SecurityAuthentication
 }
 
@@ -53,6 +54,7 @@ export type HttpBearerConfiguration = { tokenProvider: TokenProvider };
 export type OAuth2Configuration = { accessToken: string };
 
 export type AuthMethodsConfiguration = {
+    "default"?: SecurityAuthentication,
     "bearerAuth"?: HttpBearerConfiguration
 }
 
@@ -66,6 +68,7 @@ export function configureAuthMethods(config: AuthMethodsConfiguration | undefine
     if (!config) {
         return authMethods;
     }
+    authMethods["default"] = config["default"]
 
     if (config["bearerAuth"]) {
         authMethods["bearerAuth"] = new BearerAuthAuthentication(

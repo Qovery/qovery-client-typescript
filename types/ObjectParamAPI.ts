@@ -245,7 +245,7 @@ export class ObjectAccountInfoApi {
      * Get Account information
      * @param param the request object
      */
-    public getAccountInformation(param: AccountInfoApiGetAccountInformationRequest, options?: Configuration): Promise<AccountInfoResponse> {
+    public getAccountInformation(param: AccountInfoApiGetAccountInformationRequest = {}, options?: Configuration): Promise<AccountInfoResponse> {
         return this.api.getAccountInformation( options).toPromise();
     }
 
@@ -1912,7 +1912,7 @@ export class ObjectCloudProviderApi {
      * List AWS features available
      * @param param the request object
      */
-    public listAWSFeatures(param: CloudProviderApiListAWSFeaturesRequest, options?: Configuration): Promise<ClusterFeatureResponseList> {
+    public listAWSFeatures(param: CloudProviderApiListAWSFeaturesRequest = {}, options?: Configuration): Promise<ClusterFeatureResponseList> {
         return this.api.listAWSFeatures( options).toPromise();
     }
 
@@ -1920,7 +1920,7 @@ export class ObjectCloudProviderApi {
      * List AWS regions
      * @param param the request object
      */
-    public listAWSRegions(param: CloudProviderApiListAWSRegionsRequest, options?: Configuration): Promise<ClusterRegionResponseList> {
+    public listAWSRegions(param: CloudProviderApiListAWSRegionsRequest = {}, options?: Configuration): Promise<ClusterRegionResponseList> {
         return this.api.listAWSRegions( options).toPromise();
     }
 
@@ -1928,7 +1928,7 @@ export class ObjectCloudProviderApi {
      * List Cloud providers available
      * @param param the request object
      */
-    public listCloudProvider(param: CloudProviderApiListCloudProviderRequest, options?: Configuration): Promise<CloudProviderResponseList> {
+    public listCloudProvider(param: CloudProviderApiListCloudProviderRequest = {}, options?: Configuration): Promise<CloudProviderResponseList> {
         return this.api.listCloudProvider( options).toPromise();
     }
 
@@ -1936,7 +1936,7 @@ export class ObjectCloudProviderApi {
      * List DO features available
      * @param param the request object
      */
-    public listDOFeatures(param: CloudProviderApiListDOFeaturesRequest, options?: Configuration): Promise<ClusterFeatureResponseList> {
+    public listDOFeatures(param: CloudProviderApiListDOFeaturesRequest = {}, options?: Configuration): Promise<ClusterFeatureResponseList> {
         return this.api.listDOFeatures( options).toPromise();
     }
 
@@ -1944,7 +1944,7 @@ export class ObjectCloudProviderApi {
      * List DO regions
      * @param param the request object
      */
-    public listDORegions(param: CloudProviderApiListDORegionsRequest, options?: Configuration): Promise<ClusterRegionResponseList> {
+    public listDORegions(param: CloudProviderApiListDORegionsRequest = {}, options?: Configuration): Promise<ClusterRegionResponseList> {
         return this.api.listDORegions( options).toPromise();
     }
 
@@ -1952,7 +1952,7 @@ export class ObjectCloudProviderApi {
      * List Scaleway features available
      * @param param the request object
      */
-    public listScalewayFeatures(param: CloudProviderApiListScalewayFeaturesRequest, options?: Configuration): Promise<ClusterFeatureResponseList> {
+    public listScalewayFeatures(param: CloudProviderApiListScalewayFeaturesRequest = {}, options?: Configuration): Promise<ClusterFeatureResponseList> {
         return this.api.listScalewayFeatures( options).toPromise();
     }
 
@@ -1960,7 +1960,7 @@ export class ObjectCloudProviderApi {
      * List Scaleway regions
      * @param param the request object
      */
-    public listScalewayRegions(param: CloudProviderApiListScalewayRegionsRequest, options?: Configuration): Promise<ClusterRegionResponseList> {
+    public listScalewayRegions(param: CloudProviderApiListScalewayRegionsRequest = {}, options?: Configuration): Promise<ClusterRegionResponseList> {
         return this.api.listScalewayRegions( options).toPromise();
     }
 
@@ -4205,7 +4205,7 @@ export class ObjectGitRepositoriesApi {
      * Get bitbucket repositories of the connected user
      * @param param the request object
      */
-    public getBitbucketRepositories(param: GitRepositoriesApiGetBitbucketRepositoriesRequest, options?: Configuration): Promise<GitRepositoryResponseList> {
+    public getBitbucketRepositories(param: GitRepositoriesApiGetBitbucketRepositoriesRequest = {}, options?: Configuration): Promise<GitRepositoryResponseList> {
         return this.api.getBitbucketRepositories( options).toPromise();
     }
 
@@ -4213,7 +4213,7 @@ export class ObjectGitRepositoriesApi {
      * Get bitbucket branches of the specified repository
      * @param param the request object
      */
-    public getBitbucketRepositoryBranches(param: GitRepositoriesApiGetBitbucketRepositoryBranchesRequest, options?: Configuration): Promise<GitRepositoryBranchResponseList> {
+    public getBitbucketRepositoryBranches(param: GitRepositoriesApiGetBitbucketRepositoryBranchesRequest = {}, options?: Configuration): Promise<GitRepositoryBranchResponseList> {
         return this.api.getBitbucketRepositoryBranches(param.name,  options).toPromise();
     }
 
@@ -4221,7 +4221,7 @@ export class ObjectGitRepositoriesApi {
      * Get git provider accounts
      * @param param the request object
      */
-    public getGitProviderAccount(param: GitRepositoriesApiGetGitProviderAccountRequest, options?: Configuration): Promise<GitAuthProviderResponseList> {
+    public getGitProviderAccount(param: GitRepositoriesApiGetGitProviderAccountRequest = {}, options?: Configuration): Promise<GitAuthProviderResponseList> {
         return this.api.getGitProviderAccount( options).toPromise();
     }
 
@@ -4229,7 +4229,7 @@ export class ObjectGitRepositoriesApi {
      * Get github repositories of the connected user
      * @param param the request object
      */
-    public getGithubRepositories(param: GitRepositoriesApiGetGithubRepositoriesRequest, options?: Configuration): Promise<GitRepositoryResponseList> {
+    public getGithubRepositories(param: GitRepositoriesApiGetGithubRepositoriesRequest = {}, options?: Configuration): Promise<GitRepositoryResponseList> {
         return this.api.getGithubRepositories( options).toPromise();
     }
 
@@ -4237,7 +4237,7 @@ export class ObjectGitRepositoriesApi {
      * Get github branches of the specified repository
      * @param param the request object
      */
-    public getGithubRepositoryBranches(param: GitRepositoriesApiGetGithubRepositoryBranchesRequest, options?: Configuration): Promise<GitRepositoryBranchResponseList> {
+    public getGithubRepositoryBranches(param: GitRepositoriesApiGetGithubRepositoryBranchesRequest = {}, options?: Configuration): Promise<GitRepositoryBranchResponseList> {
         return this.api.getGithubRepositoryBranches(param.name,  options).toPromise();
     }
 
@@ -4245,7 +4245,7 @@ export class ObjectGitRepositoriesApi {
      * Get gitlab repositories of the connected user
      * @param param the request object
      */
-    public getGitlabRepositories(param: GitRepositoriesApiGetGitlabRepositoriesRequest, options?: Configuration): Promise<GitRepositoryResponseList> {
+    public getGitlabRepositories(param: GitRepositoriesApiGetGitlabRepositoriesRequest = {}, options?: Configuration): Promise<GitRepositoryResponseList> {
         return this.api.getGitlabRepositories( options).toPromise();
     }
 
@@ -4253,7 +4253,7 @@ export class ObjectGitRepositoriesApi {
      * Get gitlab branches of the specified repository
      * @param param the request object
      */
-    public getGitlabRepositoryBranches(param: GitRepositoriesApiGetGitlabRepositoryBranchesRequest, options?: Configuration): Promise<GitRepositoryBranchResponseList> {
+    public getGitlabRepositoryBranches(param: GitRepositoriesApiGetGitlabRepositoryBranchesRequest = {}, options?: Configuration): Promise<GitRepositoryBranchResponseList> {
         return this.api.getGitlabRepositoryBranches(param.name,  options).toPromise();
     }
 
@@ -4619,7 +4619,7 @@ export class ObjectOrganizationMainCallsApi {
      * Create an organization
      * @param param the request object
      */
-    public createOrganization(param: OrganizationMainCallsApiCreateOrganizationRequest, options?: Configuration): Promise<OrganizationResponse> {
+    public createOrganization(param: OrganizationMainCallsApiCreateOrganizationRequest = {}, options?: Configuration): Promise<OrganizationResponse> {
         return this.api.createOrganization(param.organizationRequest,  options).toPromise();
     }
 
@@ -4653,7 +4653,7 @@ export class ObjectOrganizationMainCallsApi {
      * List user organizations
      * @param param the request object
      */
-    public listOrganization(param: OrganizationMainCallsApiListOrganizationRequest, options?: Configuration): Promise<OrganizationResponseList> {
+    public listOrganization(param: OrganizationMainCallsApiListOrganizationRequest = {}, options?: Configuration): Promise<OrganizationResponseList> {
         return this.api.listOrganization( options).toPromise();
     }
 
@@ -5287,7 +5287,7 @@ export class ObjectReferralRewardsApi {
      * Get your referral information
      * @param param the request object
      */
-    public getAccountReferral(param: ReferralRewardsApiGetAccountReferralRequest, options?: Configuration): Promise<ReferralResponse> {
+    public getAccountReferral(param: ReferralRewardsApiGetAccountReferralRequest = {}, options?: Configuration): Promise<ReferralResponse> {
         return this.api.getAccountReferral( options).toPromise();
     }
 
@@ -5296,7 +5296,7 @@ export class ObjectReferralRewardsApi {
      * Claim a reward
      * @param param the request object
      */
-    public postAccountRewardClaim(param: ReferralRewardsApiPostAccountRewardClaimRequest, options?: Configuration): Promise<void> {
+    public postAccountRewardClaim(param: ReferralRewardsApiPostAccountRewardClaimRequest = {}, options?: Configuration): Promise<void> {
         return this.api.postAccountRewardClaim(param.rewardClaimResponse,  options).toPromise();
     }
 
