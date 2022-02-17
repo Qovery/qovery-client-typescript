@@ -19,7 +19,6 @@ CloudProviderCredentialsApi.md
 ClustersApi.md
 CustomDomainApi.md
 DatabaseActionsApi.md
-DatabaseApi.md
 DatabaseApplicationApi.md
 DatabaseEventApi.md
 DatabaseMainCallsApi.md
@@ -64,7 +63,6 @@ apis/CloudProviderCredentialsApi.ts
 apis/ClustersApi.ts
 apis/CustomDomainApi.ts
 apis/DatabaseActionsApi.ts
-apis/DatabaseApi.ts
 apis/DatabaseApplicationApi.ts
 apis/DatabaseEventApi.ts
 apis/DatabaseMainCallsApi.ts

@@ -127,6 +127,51 @@ export class BillingApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Delete credit card
+     * @param organizationId Organization ID
+     * @param creditCardId Credit Card ID
+     */
+    public async deleteCreditCard(organizationId: string, creditCardId: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'organizationId' is not null or undefined
+        if (organizationId === null || organizationId === undefined) {
+            throw new RequiredError("BillingApi", "deleteCreditCard", "organizationId");
+        }
+
+
+        // verify required parameter 'creditCardId' is not null or undefined
+        if (creditCardId === null || creditCardId === undefined) {
+            throw new RequiredError("BillingApi", "deleteCreditCard", "creditCardId");
+        }
+
+
+        // Path Params
+        const localVarPath = '/organization/{organizationId}/creditCard/{creditCardId}'
+            .replace('{' + 'organizationId' + '}', encodeURIComponent(String(organizationId)))
+            .replace('{' + 'creditCardId' + '}', encodeURIComponent(String(creditCardId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
      * Edit Organization Billing Info
      * @param organizationId Organization ID
      * @param billingInfoRequest 
@@ -536,51 +581,6 @@ export class BillingApiRequestFactory extends BaseAPIRequestFactory {
         return requestContext;
     }
 
-    /**
-     * Delete credit card
-     * @param organizationId Organization ID
-     * @param creditCardId Credit Card ID
-     */
-    public async organizationOrganizationIdCreditCardCreditCardIdDelete(organizationId: string, creditCardId: string, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'organizationId' is not null or undefined
-        if (organizationId === null || organizationId === undefined) {
-            throw new RequiredError("BillingApi", "organizationOrganizationIdCreditCardCreditCardIdDelete", "organizationId");
-        }
-
-
-        // verify required parameter 'creditCardId' is not null or undefined
-        if (creditCardId === null || creditCardId === undefined) {
-            throw new RequiredError("BillingApi", "organizationOrganizationIdCreditCardCreditCardIdDelete", "creditCardId");
-        }
-
-
-        // Path Params
-        const localVarPath = '/organization/{organizationId}/creditCard/{creditCardId}'
-            .replace('{' + 'organizationId' + '}', encodeURIComponent(String(organizationId)))
-            .replace('{' + 'creditCardId' + '}', encodeURIComponent(String(creditCardId)));
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["bearerAuth"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
 }
 
 export class BillingApiResponseProcessor {
@@ -640,6 +640,40 @@ export class BillingApiResponseProcessor {
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
             throw new ApiException<undefined>(response.httpStatusCode, "Bad request", undefined, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Access token is missing or invalid", undefined, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Access forbidden", undefined, response.headers);
+        }
+        if (isCodeInRange("404", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Resource not found", undefined, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return body;
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to deleteCreditCard
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async deleteCreditCard(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
             throw new ApiException<undefined>(response.httpStatusCode, "Access token is missing or invalid", undefined, response.headers);
@@ -1018,40 +1052,6 @@ export class BillingApiResponseProcessor {
      public async organizationDownloadAllInvoices(response: ResponseContext): Promise<void > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("202", response.httpStatusCode)) {
-            return;
-        }
-        if (isCodeInRange("401", response.httpStatusCode)) {
-            throw new ApiException<undefined>(response.httpStatusCode, "Access token is missing or invalid", undefined, response.headers);
-        }
-        if (isCodeInRange("403", response.httpStatusCode)) {
-            throw new ApiException<undefined>(response.httpStatusCode, "Access forbidden", undefined, response.headers);
-        }
-        if (isCodeInRange("404", response.httpStatusCode)) {
-            throw new ApiException<undefined>(response.httpStatusCode, "Resource not found", undefined, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: void = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "void", ""
-            ) as void;
-            return body;
-        }
-
-        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
-     * @params response Response returned by the server for a request to organizationOrganizationIdCreditCardCreditCardIdDelete
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async organizationOrganizationIdCreditCardCreditCardIdDelete(response: ResponseContext): Promise<void > {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("204", response.httpStatusCode)) {
             return;
         }
         if (isCodeInRange("401", response.httpStatusCode)) {

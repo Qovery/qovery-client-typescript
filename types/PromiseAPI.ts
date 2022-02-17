@@ -1081,6 +1081,16 @@ export class PromiseBillingApi {
     }
 
     /**
+     * Delete credit card
+     * @param organizationId Organization ID
+     * @param creditCardId Credit Card ID
+     */
+    public deleteCreditCard(organizationId: string, creditCardId: string, _options?: Configuration): Promise<void> {
+        const result = this.api.deleteCreditCard(organizationId, creditCardId, _options);
+        return result.toPromise();
+    }
+
+    /**
      * Edit Organization Billing Info
      * @param organizationId Organization ID
      * @param billingInfoRequest 
@@ -1174,16 +1184,6 @@ export class PromiseBillingApi {
      */
     public organizationDownloadAllInvoices(organizationId: string, _options?: Configuration): Promise<void> {
         const result = this.api.organizationDownloadAllInvoices(organizationId, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Delete credit card
-     * @param organizationId Organization ID
-     * @param creditCardId Credit Card ID
-     */
-    public organizationOrganizationIdCreditCardCreditCardIdDelete(organizationId: string, creditCardId: string, _options?: Configuration): Promise<void> {
-        const result = this.api.organizationOrganizationIdCreditCardCreditCardIdDelete(organizationId, creditCardId, _options);
         return result.toPromise();
     }
 
@@ -1636,36 +1636,6 @@ export class PromiseCustomDomainApi {
      */
     public listApplicationCustomDomain(applicationId: string, _options?: Configuration): Promise<CustomDomainResponseList> {
         const result = this.api.listApplicationCustomDomain(applicationId, _options);
-        return result.toPromise();
-    }
-
-
-}
-
-
-
-import { ObservableDatabaseApi } from './ObservableAPI';
-
-import { DatabaseApiRequestFactory, DatabaseApiResponseProcessor} from "../apis/DatabaseApi";
-export class PromiseDatabaseApi {
-    private api: ObservableDatabaseApi
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: DatabaseApiRequestFactory,
-        responseProcessor?: DatabaseApiResponseProcessor
-    ) {
-        this.api = new ObservableDatabaseApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * If you don't specify credentials, Qovery will autogenerate them.
-     * Create a logical database on the database
-     * @param databaseId Database ID
-     * @param logicalDatabaseRequest 
-     */
-    public createLogicalDatabaseOnDatabase(databaseId: string, logicalDatabaseRequest?: LogicalDatabaseRequest, _options?: Configuration): Promise<LogicalDatabaseResponse> {
-        const result = this.api.createLogicalDatabaseOnDatabase(databaseId, logicalDatabaseRequest, _options);
         return result.toPromise();
     }
 
@@ -2354,6 +2324,17 @@ export class PromiseEnvironmentSecretApi {
     }
 
     /**
+     * - To delete a secret you must have the project user permission - You can't delete a BUILT_IN secret - If you delete a secret having override or alias, the associated override/alias will be deleted as well  operationId: deleteEnvironmentSecret 
+     * Delete a secret from the environment
+     * @param environmentId Environment ID
+     * @param secretId Secret ID
+     */
+    public deleteEnvironmentSecret(environmentId: string, secretId: string, _options?: Configuration): Promise<void> {
+        const result = this.api.deleteEnvironmentSecret(environmentId, secretId, _options);
+        return result.toPromise();
+    }
+
+    /**
      * - You can't edit a BUILT_IN secret - For an override, you can't edit the key - For an alias, you can't edit the value - An override can only have a scope lower to the secret it is overriding (hierarchy is BUILT_IN > PROJECT > ENVIRONMENT > APPLICATION) 
      * Edit a secret belonging to the environment
      * @param environmentId Environment ID
@@ -2362,17 +2343,6 @@ export class PromiseEnvironmentSecretApi {
      */
     public editEnvironmentSecret(environmentId: string, secretId: string, secretEditRequest: SecretEditRequest, _options?: Configuration): Promise<SecretResponse> {
         const result = this.api.editEnvironmentSecret(environmentId, secretId, secretEditRequest, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * - To delete a secret you must have the project user permission - You can't delete a BUILT_IN secret - If you delete a secret having override or alias, the associated override/alias will be deleted as well  operationId: deleteEnvironmentSecret 
-     * Delete a secret from the environment
-     * @param environmentId Environment ID
-     * @param secretId Secret ID
-     */
-    public environmentEnvironmentIdSecretSecretIdDelete(environmentId: string, secretId: string, _options?: Configuration): Promise<void> {
-        const result = this.api.environmentEnvironmentIdSecretSecretIdDelete(environmentId, secretId, _options);
         return result.toPromise();
     }
 
@@ -2624,6 +2594,17 @@ export class PromiseLogicalDatabaseApi {
         responseProcessor?: LogicalDatabaseApiResponseProcessor
     ) {
         this.api = new ObservableLogicalDatabaseApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * If you don't specify credentials, Qovery will autogenerate them.
+     * Create a logical database on the database
+     * @param databaseId Database ID
+     * @param logicalDatabaseRequest 
+     */
+    public createLogicalDatabaseOnDatabase(databaseId: string, logicalDatabaseRequest?: LogicalDatabaseRequest, _options?: Configuration): Promise<LogicalDatabaseResponse> {
+        const result = this.api.createLogicalDatabaseOnDatabase(databaseId, logicalDatabaseRequest, _options);
+        return result.toPromise();
     }
 
     /**
@@ -3105,6 +3086,17 @@ export class PromiseProjectSecretApi {
     }
 
     /**
+     * - To delete a secret you must have the project user permission - You can't delete a BUILT_IN secret - If you delete a secret having override or alias, the associated override/alias will be deleted as well  operationId: deleteProjectSecret 
+     * Delete a secret from a project
+     * @param projectId Project ID
+     * @param secretId Secret ID
+     */
+    public deleteProjectSecret(projectId: string, secretId: string, _options?: Configuration): Promise<void> {
+        const result = this.api.deleteProjectSecret(projectId, secretId, _options);
+        return result.toPromise();
+    }
+
+    /**
      * - You can't edit a BUILT_IN secret - For an override, you can't edit the key - For an alias, you can't edit the value - An override can only have a scope lower to the secret it is overriding (hierarchy is BUILT_IN > PROJECT > ENVIRONMENT > APPLICATION) 
      * Edit a secret belonging to the project
      * @param projectId Project ID
@@ -3122,17 +3114,6 @@ export class PromiseProjectSecretApi {
      */
     public listProjectSecrets(projectId: string, _options?: Configuration): Promise<SecretResponseList> {
         const result = this.api.listProjectSecrets(projectId, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * - To delete a secret you must have the project user permission - You can't delete a BUILT_IN secret - If you delete a secret having override or alias, the associated override/alias will be deleted as well  operationId: deleteProjectSecret 
-     * Delete a secret from a project
-     * @param projectId Project ID
-     * @param secretId Secret ID
-     */
-    public projectProjectIdSecretSecretIdDelete(projectId: string, secretId: string, _options?: Configuration): Promise<void> {
-        const result = this.api.projectProjectIdSecretSecretIdDelete(projectId, secretId, _options);
         return result.toPromise();
     }
 

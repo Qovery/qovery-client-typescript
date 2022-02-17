@@ -7,8 +7,8 @@ Method | HTTP request | Description
 [**createEnvironmentSecret**](EnvironmentSecretApi.md#createEnvironmentSecret) | **POST** /environment/{environmentId}/secret | Add a secret to the environment
 [**createEnvironmentSecretAlias**](EnvironmentSecretApi.md#createEnvironmentSecretAlias) | **POST** /environment/{environmentId}/secret/{secretId}/alias | Create a secret alias at the environment level
 [**createEnvironmentSecretOverride**](EnvironmentSecretApi.md#createEnvironmentSecretOverride) | **POST** /environment/{environmentId}/secret/{secretId}/override | Create a secret override at the environment level
+[**deleteEnvironmentSecret**](EnvironmentSecretApi.md#deleteEnvironmentSecret) | **DELETE** /environment/{environmentId}/secret/{secretId} | Delete a secret from the environment
 [**editEnvironmentSecret**](EnvironmentSecretApi.md#editEnvironmentSecret) | **PUT** /environment/{environmentId}/secret/{secretId} | Edit a secret belonging to the environment
-[**environmentEnvironmentIdSecretSecretIdDelete**](EnvironmentSecretApi.md#environmentEnvironmentIdSecretSecretIdDelete) | **DELETE** /environment/{environmentId}/secret/{secretId} | Delete a secret from the environment
 [**listEnvironmentSecrets**](EnvironmentSecretApi.md#listEnvironmentSecrets) | **GET** /environment/{environmentId}/secret | List environment secrets
 
 
@@ -208,6 +208,66 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
+# **deleteEnvironmentSecret**
+> void deleteEnvironmentSecret()
+
+- To delete a secret you must have the project user permission - You can't delete a BUILT_IN secret - If you delete a secret having override or alias, the associated override/alias will be deleted as well  operationId: deleteEnvironmentSecret 
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .EnvironmentSecretApi(configuration);
+
+let body:.EnvironmentSecretApiDeleteEnvironmentSecretRequest = {
+  // string | Environment ID
+  environmentId: "environmentId_example",
+  // string | Secret ID
+  secretId: "secretId_example",
+};
+
+apiInstance.deleteEnvironmentSecret(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **environmentId** | [**string**] | Environment ID | defaults to undefined
+ **secretId** | [**string**] | Secret ID | defaults to undefined
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | The resource was deleted successfully |  -  |
+**401** | Access token is missing or invalid |  -  |
+**403** | Access forbidden |  -  |
+**404** | Resource not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 # **editEnvironmentSecret**
 > SecretResponse editEnvironmentSecret(secretEditRequest)
 
@@ -269,66 +329,6 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Edited the secret value |  -  |
 **400** | Bad request |  -  |
-**401** | Access token is missing or invalid |  -  |
-**403** | Access forbidden |  -  |
-**404** | Resource not found |  -  |
-
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
-# **environmentEnvironmentIdSecretSecretIdDelete**
-> void environmentEnvironmentIdSecretSecretIdDelete()
-
-- To delete a secret you must have the project user permission - You can't delete a BUILT_IN secret - If you delete a secret having override or alias, the associated override/alias will be deleted as well  operationId: deleteEnvironmentSecret 
-
-### Example
-
-
-```typescript
-import {  } from '';
-import * as fs from 'fs';
-
-const configuration = .createConfiguration();
-const apiInstance = new .EnvironmentSecretApi(configuration);
-
-let body:.EnvironmentSecretApiEnvironmentEnvironmentIdSecretSecretIdDeleteRequest = {
-  // string | Environment ID
-  environmentId: "environmentId_example",
-  // string | Secret ID
-  secretId: "secretId_example",
-};
-
-apiInstance.environmentEnvironmentIdSecretSecretIdDelete(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **environmentId** | [**string**] | Environment ID | defaults to undefined
- **secretId** | [**string**] | Secret ID | defaults to undefined
-
-
-### Return type
-
-**void**
-
-### Authorization
-
-[bearerAuth](README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: Not defined
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**204** | The resource was deleted successfully |  -  |
 **401** | Access token is missing or invalid |  -  |
 **403** | Access forbidden |  -  |
 **404** | Resource not found |  -  |

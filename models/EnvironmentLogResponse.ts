@@ -86,5 +86,5 @@ export class EnvironmentLogResponse {
 }
 
 
-export type EnvironmentLogResponseStateEnum = "INITIALIZED" | "QUEUED" | "BUILDING" | "BUILD_ERROR" | "BUILT" | "DEPLOYING" | "DEPLOYMENT_ERROR" | "DEPLOYED" | "STOPPING" | "STOP_ERROR" | "STOPPED" | "DELETING" | "DELETE_ERROR" | "DELETED" | "RUNNING" | "RUNNING_ERROR" ;
+export type EnvironmentLogResponseStateEnum = "BUILD_ERROR" | "BUILDING" | "BUILT" | "DELETE_ERROR" | "DELETED" | "DELETING" | "DEPLOYED" | "DEPLOYING" | "DEPLOYMENT_ERROR" | "INITIALIZED" | "QUEUED" | "RUNNING" | "RUNNING_ERROR" | "STOP_ERROR" | "STOPPED" | "STOPPING" ;
 

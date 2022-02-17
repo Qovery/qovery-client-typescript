@@ -1884,6 +1884,30 @@ export class ObservableBillingApi {
     }
 
     /**
+     * Delete credit card
+     * @param organizationId Organization ID
+     * @param creditCardId Credit Card ID
+     */
+    public deleteCreditCard(organizationId: string, creditCardId: string, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.deleteCreditCard(organizationId, creditCardId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteCreditCard(rsp)));
+            }));
+    }
+
+    /**
      * Edit Organization Billing Info
      * @param organizationId Organization ID
      * @param billingInfoRequest 
@@ -2117,30 +2141,6 @@ export class ObservableBillingApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.organizationDownloadAllInvoices(rsp)));
-            }));
-    }
-
-    /**
-     * Delete credit card
-     * @param organizationId Organization ID
-     * @param creditCardId Credit Card ID
-     */
-    public organizationOrganizationIdCreditCardCreditCardIdDelete(organizationId: string, creditCardId: string, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.organizationOrganizationIdCreditCardCreditCardIdDelete(organizationId, creditCardId, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.organizationOrganizationIdCreditCardCreditCardIdDelete(rsp)));
             }));
     }
 
@@ -3121,49 +3121,6 @@ export class ObservableCustomDomainApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.listApplicationCustomDomain(rsp)));
-            }));
-    }
-
-}
-
-import { DatabaseApiRequestFactory, DatabaseApiResponseProcessor} from "../apis/DatabaseApi";
-export class ObservableDatabaseApi {
-    private requestFactory: DatabaseApiRequestFactory;
-    private responseProcessor: DatabaseApiResponseProcessor;
-    private configuration: Configuration;
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: DatabaseApiRequestFactory,
-        responseProcessor?: DatabaseApiResponseProcessor
-    ) {
-        this.configuration = configuration;
-        this.requestFactory = requestFactory || new DatabaseApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new DatabaseApiResponseProcessor();
-    }
-
-    /**
-     * If you don't specify credentials, Qovery will autogenerate them.
-     * Create a logical database on the database
-     * @param databaseId Database ID
-     * @param logicalDatabaseRequest 
-     */
-    public createLogicalDatabaseOnDatabase(databaseId: string, logicalDatabaseRequest?: LogicalDatabaseRequest, _options?: Configuration): Observable<LogicalDatabaseResponse> {
-        const requestContextPromise = this.requestFactory.createLogicalDatabaseOnDatabase(databaseId, logicalDatabaseRequest, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createLogicalDatabaseOnDatabase(rsp)));
             }));
     }
 
@@ -4455,6 +4412,31 @@ export class ObservableEnvironmentSecretApi {
     }
 
     /**
+     * - To delete a secret you must have the project user permission - You can't delete a BUILT_IN secret - If you delete a secret having override or alias, the associated override/alias will be deleted as well  operationId: deleteEnvironmentSecret 
+     * Delete a secret from the environment
+     * @param environmentId Environment ID
+     * @param secretId Secret ID
+     */
+    public deleteEnvironmentSecret(environmentId: string, secretId: string, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.deleteEnvironmentSecret(environmentId, secretId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteEnvironmentSecret(rsp)));
+            }));
+    }
+
+    /**
      * - You can't edit a BUILT_IN secret - For an override, you can't edit the key - For an alias, you can't edit the value - An override can only have a scope lower to the secret it is overriding (hierarchy is BUILT_IN > PROJECT > ENVIRONMENT > APPLICATION) 
      * Edit a secret belonging to the environment
      * @param environmentId Environment ID
@@ -4477,31 +4459,6 @@ export class ObservableEnvironmentSecretApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.editEnvironmentSecret(rsp)));
-            }));
-    }
-
-    /**
-     * - To delete a secret you must have the project user permission - You can't delete a BUILT_IN secret - If you delete a secret having override or alias, the associated override/alias will be deleted as well  operationId: deleteEnvironmentSecret 
-     * Delete a secret from the environment
-     * @param environmentId Environment ID
-     * @param secretId Secret ID
-     */
-    public environmentEnvironmentIdSecretSecretIdDelete(environmentId: string, secretId: string, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.environmentEnvironmentIdSecretSecretIdDelete(environmentId, secretId, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.environmentEnvironmentIdSecretSecretIdDelete(rsp)));
             }));
     }
 
@@ -5001,6 +4958,31 @@ export class ObservableLogicalDatabaseApi {
         this.configuration = configuration;
         this.requestFactory = requestFactory || new LogicalDatabaseApiRequestFactory(configuration);
         this.responseProcessor = responseProcessor || new LogicalDatabaseApiResponseProcessor();
+    }
+
+    /**
+     * If you don't specify credentials, Qovery will autogenerate them.
+     * Create a logical database on the database
+     * @param databaseId Database ID
+     * @param logicalDatabaseRequest 
+     */
+    public createLogicalDatabaseOnDatabase(databaseId: string, logicalDatabaseRequest?: LogicalDatabaseRequest, _options?: Configuration): Observable<LogicalDatabaseResponse> {
+        const requestContextPromise = this.requestFactory.createLogicalDatabaseOnDatabase(databaseId, logicalDatabaseRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createLogicalDatabaseOnDatabase(rsp)));
+            }));
     }
 
     /**
@@ -5980,6 +5962,31 @@ export class ObservableProjectSecretApi {
     }
 
     /**
+     * - To delete a secret you must have the project user permission - You can't delete a BUILT_IN secret - If you delete a secret having override or alias, the associated override/alias will be deleted as well  operationId: deleteProjectSecret 
+     * Delete a secret from a project
+     * @param projectId Project ID
+     * @param secretId Secret ID
+     */
+    public deleteProjectSecret(projectId: string, secretId: string, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.deleteProjectSecret(projectId, secretId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteProjectSecret(rsp)));
+            }));
+    }
+
+    /**
      * - You can't edit a BUILT_IN secret - For an override, you can't edit the key - For an alias, you can't edit the value - An override can only have a scope lower to the secret it is overriding (hierarchy is BUILT_IN > PROJECT > ENVIRONMENT > APPLICATION) 
      * Edit a secret belonging to the project
      * @param projectId Project ID
@@ -6025,31 +6032,6 @@ export class ObservableProjectSecretApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.listProjectSecrets(rsp)));
-            }));
-    }
-
-    /**
-     * - To delete a secret you must have the project user permission - You can't delete a BUILT_IN secret - If you delete a secret having override or alias, the associated override/alias will be deleted as well  operationId: deleteProjectSecret 
-     * Delete a secret from a project
-     * @param projectId Project ID
-     * @param secretId Secret ID
-     */
-    public projectProjectIdSecretSecretIdDelete(projectId: string, secretId: string, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.projectProjectIdSecretSecretIdDelete(projectId, secretId, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.projectProjectIdSecretSecretIdDelete(rsp)));
             }));
     }
 

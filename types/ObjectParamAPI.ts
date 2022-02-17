@@ -1632,6 +1632,21 @@ export interface BillingApiAddCreditCodeRequest {
     organizationCreditCodeRequest?: OrganizationCreditCodeRequest
 }
 
+export interface BillingApiDeleteCreditCardRequest {
+    /**
+     * Organization ID
+     * @type string
+     * @memberof BillingApideleteCreditCard
+     */
+    organizationId: string
+    /**
+     * Credit Card ID
+     * @type string
+     * @memberof BillingApideleteCreditCard
+     */
+    creditCardId: string
+}
+
 export interface BillingApiEditOrganizationBillingInfoRequest {
     /**
      * Organization ID
@@ -1746,21 +1761,6 @@ export interface BillingApiOrganizationDownloadAllInvoicesRequest {
     organizationId: string
 }
 
-export interface BillingApiOrganizationOrganizationIdCreditCardCreditCardIdDeleteRequest {
-    /**
-     * Organization ID
-     * @type string
-     * @memberof BillingApiorganizationOrganizationIdCreditCardCreditCardIdDelete
-     */
-    organizationId: string
-    /**
-     * Credit Card ID
-     * @type string
-     * @memberof BillingApiorganizationOrganizationIdCreditCardCreditCardIdDelete
-     */
-    creditCardId: string
-}
-
 export class ObjectBillingApi {
     private api: ObservableBillingApi
 
@@ -1782,6 +1782,14 @@ export class ObjectBillingApi {
      */
     public addCreditCode(param: BillingApiAddCreditCodeRequest, options?: Configuration): Promise<void> {
         return this.api.addCreditCode(param.organizationId, param.organizationCreditCodeRequest,  options).toPromise();
+    }
+
+    /**
+     * Delete credit card
+     * @param param the request object
+     */
+    public deleteCreditCard(param: BillingApiDeleteCreditCardRequest, options?: Configuration): Promise<void> {
+        return this.api.deleteCreditCard(param.organizationId, param.creditCardId,  options).toPromise();
     }
 
     /**
@@ -1865,14 +1873,6 @@ export class ObjectBillingApi {
      */
     public organizationDownloadAllInvoices(param: BillingApiOrganizationDownloadAllInvoicesRequest, options?: Configuration): Promise<void> {
         return this.api.organizationDownloadAllInvoices(param.organizationId,  options).toPromise();
-    }
-
-    /**
-     * Delete credit card
-     * @param param the request object
-     */
-    public organizationOrganizationIdCreditCardCreditCardIdDelete(param: BillingApiOrganizationOrganizationIdCreditCardCreditCardIdDeleteRequest, options?: Configuration): Promise<void> {
-        return this.api.organizationOrganizationIdCreditCardCreditCardIdDelete(param.organizationId, param.creditCardId,  options).toPromise();
     }
 
 }
@@ -2726,42 +2726,6 @@ export class ObjectCustomDomainApi {
      */
     public listApplicationCustomDomain(param: CustomDomainApiListApplicationCustomDomainRequest, options?: Configuration): Promise<CustomDomainResponseList> {
         return this.api.listApplicationCustomDomain(param.applicationId,  options).toPromise();
-    }
-
-}
-
-import { ObservableDatabaseApi } from "./ObservableAPI";
-import { DatabaseApiRequestFactory, DatabaseApiResponseProcessor} from "../apis/DatabaseApi";
-
-export interface DatabaseApiCreateLogicalDatabaseOnDatabaseRequest {
-    /**
-     * Database ID
-     * @type string
-     * @memberof DatabaseApicreateLogicalDatabaseOnDatabase
-     */
-    databaseId: string
-    /**
-     * 
-     * @type LogicalDatabaseRequest
-     * @memberof DatabaseApicreateLogicalDatabaseOnDatabase
-     */
-    logicalDatabaseRequest?: LogicalDatabaseRequest
-}
-
-export class ObjectDatabaseApi {
-    private api: ObservableDatabaseApi
-
-    public constructor(configuration: Configuration, requestFactory?: DatabaseApiRequestFactory, responseProcessor?: DatabaseApiResponseProcessor) {
-        this.api = new ObservableDatabaseApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * If you don't specify credentials, Qovery will autogenerate them.
-     * Create a logical database on the database
-     * @param param the request object
-     */
-    public createLogicalDatabaseOnDatabase(param: DatabaseApiCreateLogicalDatabaseOnDatabaseRequest, options?: Configuration): Promise<LogicalDatabaseResponse> {
-        return this.api.createLogicalDatabaseOnDatabase(param.databaseId, param.logicalDatabaseRequest,  options).toPromise();
     }
 
 }
@@ -3790,6 +3754,21 @@ export interface EnvironmentSecretApiCreateEnvironmentSecretOverrideRequest {
     value?: Value
 }
 
+export interface EnvironmentSecretApiDeleteEnvironmentSecretRequest {
+    /**
+     * Environment ID
+     * @type string
+     * @memberof EnvironmentSecretApideleteEnvironmentSecret
+     */
+    environmentId: string
+    /**
+     * Secret ID
+     * @type string
+     * @memberof EnvironmentSecretApideleteEnvironmentSecret
+     */
+    secretId: string
+}
+
 export interface EnvironmentSecretApiEditEnvironmentSecretRequest {
     /**
      * Environment ID
@@ -3809,21 +3788,6 @@ export interface EnvironmentSecretApiEditEnvironmentSecretRequest {
      * @memberof EnvironmentSecretApieditEnvironmentSecret
      */
     secretEditRequest: SecretEditRequest
-}
-
-export interface EnvironmentSecretApiEnvironmentEnvironmentIdSecretSecretIdDeleteRequest {
-    /**
-     * Environment ID
-     * @type string
-     * @memberof EnvironmentSecretApienvironmentEnvironmentIdSecretSecretIdDelete
-     */
-    environmentId: string
-    /**
-     * Secret ID
-     * @type string
-     * @memberof EnvironmentSecretApienvironmentEnvironmentIdSecretSecretIdDelete
-     */
-    secretId: string
 }
 
 export interface EnvironmentSecretApiListEnvironmentSecretsRequest {
@@ -3870,21 +3834,21 @@ export class ObjectEnvironmentSecretApi {
     }
 
     /**
+     * - To delete a secret you must have the project user permission - You can't delete a BUILT_IN secret - If you delete a secret having override or alias, the associated override/alias will be deleted as well  operationId: deleteEnvironmentSecret 
+     * Delete a secret from the environment
+     * @param param the request object
+     */
+    public deleteEnvironmentSecret(param: EnvironmentSecretApiDeleteEnvironmentSecretRequest, options?: Configuration): Promise<void> {
+        return this.api.deleteEnvironmentSecret(param.environmentId, param.secretId,  options).toPromise();
+    }
+
+    /**
      * - You can't edit a BUILT_IN secret - For an override, you can't edit the key - For an alias, you can't edit the value - An override can only have a scope lower to the secret it is overriding (hierarchy is BUILT_IN > PROJECT > ENVIRONMENT > APPLICATION) 
      * Edit a secret belonging to the environment
      * @param param the request object
      */
     public editEnvironmentSecret(param: EnvironmentSecretApiEditEnvironmentSecretRequest, options?: Configuration): Promise<SecretResponse> {
         return this.api.editEnvironmentSecret(param.environmentId, param.secretId, param.secretEditRequest,  options).toPromise();
-    }
-
-    /**
-     * - To delete a secret you must have the project user permission - You can't delete a BUILT_IN secret - If you delete a secret having override or alias, the associated override/alias will be deleted as well  operationId: deleteEnvironmentSecret 
-     * Delete a secret from the environment
-     * @param param the request object
-     */
-    public environmentEnvironmentIdSecretSecretIdDelete(param: EnvironmentSecretApiEnvironmentEnvironmentIdSecretSecretIdDeleteRequest, options?: Configuration): Promise<void> {
-        return this.api.environmentEnvironmentIdSecretSecretIdDelete(param.environmentId, param.secretId,  options).toPromise();
     }
 
     /**
@@ -4262,6 +4226,21 @@ export class ObjectGitRepositoriesApi {
 import { ObservableLogicalDatabaseApi } from "./ObservableAPI";
 import { LogicalDatabaseApiRequestFactory, LogicalDatabaseApiResponseProcessor} from "../apis/LogicalDatabaseApi";
 
+export interface LogicalDatabaseApiCreateLogicalDatabaseOnDatabaseRequest {
+    /**
+     * Database ID
+     * @type string
+     * @memberof LogicalDatabaseApicreateLogicalDatabaseOnDatabase
+     */
+    databaseId: string
+    /**
+     * 
+     * @type LogicalDatabaseRequest
+     * @memberof LogicalDatabaseApicreateLogicalDatabaseOnDatabase
+     */
+    logicalDatabaseRequest?: LogicalDatabaseRequest
+}
+
 export interface LogicalDatabaseApiDeleteLogicalDatabaseRequest {
     /**
      * Logical Database ID
@@ -4342,6 +4321,15 @@ export class ObjectLogicalDatabaseApi {
 
     public constructor(configuration: Configuration, requestFactory?: LogicalDatabaseApiRequestFactory, responseProcessor?: LogicalDatabaseApiResponseProcessor) {
         this.api = new ObservableLogicalDatabaseApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * If you don't specify credentials, Qovery will autogenerate them.
+     * Create a logical database on the database
+     * @param param the request object
+     */
+    public createLogicalDatabaseOnDatabase(param: LogicalDatabaseApiCreateLogicalDatabaseOnDatabaseRequest, options?: Configuration): Promise<LogicalDatabaseResponse> {
+        return this.api.createLogicalDatabaseOnDatabase(param.databaseId, param.logicalDatabaseRequest,  options).toPromise();
     }
 
     /**
@@ -5084,6 +5072,21 @@ export interface ProjectSecretApiCreateProjectSecretOverrideRequest {
     value?: Value
 }
 
+export interface ProjectSecretApiDeleteProjectSecretRequest {
+    /**
+     * Project ID
+     * @type string
+     * @memberof ProjectSecretApideleteProjectSecret
+     */
+    projectId: string
+    /**
+     * Secret ID
+     * @type string
+     * @memberof ProjectSecretApideleteProjectSecret
+     */
+    secretId: string
+}
+
 export interface ProjectSecretApiEditProjectSecretRequest {
     /**
      * Project ID
@@ -5112,21 +5115,6 @@ export interface ProjectSecretApiListProjectSecretsRequest {
      * @memberof ProjectSecretApilistProjectSecrets
      */
     projectId: string
-}
-
-export interface ProjectSecretApiProjectProjectIdSecretSecretIdDeleteRequest {
-    /**
-     * Project ID
-     * @type string
-     * @memberof ProjectSecretApiprojectProjectIdSecretSecretIdDelete
-     */
-    projectId: string
-    /**
-     * Secret ID
-     * @type string
-     * @memberof ProjectSecretApiprojectProjectIdSecretSecretIdDelete
-     */
-    secretId: string
 }
 
 export class ObjectProjectSecretApi {
@@ -5164,6 +5152,15 @@ export class ObjectProjectSecretApi {
     }
 
     /**
+     * - To delete a secret you must have the project user permission - You can't delete a BUILT_IN secret - If you delete a secret having override or alias, the associated override/alias will be deleted as well  operationId: deleteProjectSecret 
+     * Delete a secret from a project
+     * @param param the request object
+     */
+    public deleteProjectSecret(param: ProjectSecretApiDeleteProjectSecretRequest, options?: Configuration): Promise<void> {
+        return this.api.deleteProjectSecret(param.projectId, param.secretId,  options).toPromise();
+    }
+
+    /**
      * - You can't edit a BUILT_IN secret - For an override, you can't edit the key - For an alias, you can't edit the value - An override can only have a scope lower to the secret it is overriding (hierarchy is BUILT_IN > PROJECT > ENVIRONMENT > APPLICATION) 
      * Edit a secret belonging to the project
      * @param param the request object
@@ -5178,15 +5175,6 @@ export class ObjectProjectSecretApi {
      */
     public listProjectSecrets(param: ProjectSecretApiListProjectSecretsRequest, options?: Configuration): Promise<SecretResponseList> {
         return this.api.listProjectSecrets(param.projectId,  options).toPromise();
-    }
-
-    /**
-     * - To delete a secret you must have the project user permission - You can't delete a BUILT_IN secret - If you delete a secret having override or alias, the associated override/alias will be deleted as well  operationId: deleteProjectSecret 
-     * Delete a secret from a project
-     * @param param the request object
-     */
-    public projectProjectIdSecretSecretIdDelete(param: ProjectSecretApiProjectProjectIdSecretSecretIdDeleteRequest, options?: Configuration): Promise<void> {
-        return this.api.projectProjectIdSecretSecretIdDelete(param.projectId, param.secretId,  options).toPromise();
     }
 
 }

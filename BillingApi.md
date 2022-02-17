@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**addCreditCard**](BillingApi.md#addCreditCard) | **POST** /organization/{organizationId}/creditCard | Add credit card
 [**addCreditCode**](BillingApi.md#addCreditCode) | **POST** /organization/{organizationId}/creditCode | Add credit code
+[**deleteCreditCard**](BillingApi.md#deleteCreditCard) | **DELETE** /organization/{organizationId}/creditCard/{creditCardId} | Delete credit card
 [**editOrganizationBillingInfo**](BillingApi.md#editOrganizationBillingInfo) | **PUT** /organization/{organizationId}/billingInfo | Edit Organization Billing Info
 [**getClusterCurrentCost**](BillingApi.md#getClusterCurrentCost) | **GET** /organization/{organizationId}/cluster/{clusterId}/currentCost | Get cluster current cost
 [**getOrganizationBillingInfo**](BillingApi.md#getOrganizationBillingInfo) | **GET** /organization/{organizationId}/billingInfo | Get organization billing info
@@ -16,7 +17,6 @@ Method | HTTP request | Description
 [**listOrganizationCreditCards**](BillingApi.md#listOrganizationCreditCards) | **GET** /organization/{organizationId}/creditCard | List organization credit cards
 [**listOrganizationInvoice**](BillingApi.md#listOrganizationInvoice) | **GET** /organization/{organizationId}/invoice | List organization invoices
 [**organizationDownloadAllInvoices**](BillingApi.md#organizationDownloadAllInvoices) | **POST** /organization/{organizationId}/downloadInvoices | Download all invoices
-[**organizationOrganizationIdCreditCardCreditCardIdDelete**](BillingApi.md#organizationOrganizationIdCreditCardCreditCardIdDelete) | **DELETE** /organization/{organizationId}/creditCard/{creditCardId} | Delete credit card
 
 
 # **addCreditCard**
@@ -140,6 +140,65 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | add credit code |  -  |
 **400** | Bad request |  -  |
+**401** | Access token is missing or invalid |  -  |
+**403** | Access forbidden |  -  |
+**404** | Resource not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **deleteCreditCard**
+> void deleteCreditCard()
+
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .BillingApi(configuration);
+
+let body:.BillingApiDeleteCreditCardRequest = {
+  // string | Organization ID
+  organizationId: "organizationId_example",
+  // string | Credit Card ID
+  creditCardId: "creditCardId_example",
+};
+
+apiInstance.deleteCreditCard(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **organizationId** | [**string**] | Organization ID | defaults to undefined
+ **creditCardId** | [**string**] | Credit Card ID | defaults to undefined
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | The resource was deleted successfully |  -  |
 **401** | Access token is missing or invalid |  -  |
 **403** | Access forbidden |  -  |
 **404** | Resource not found |  -  |
@@ -727,65 +786,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **202** | You will receive an email containing your invoices |  -  |
-**401** | Access token is missing or invalid |  -  |
-**403** | Access forbidden |  -  |
-**404** | Resource not found |  -  |
-
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
-# **organizationOrganizationIdCreditCardCreditCardIdDelete**
-> void organizationOrganizationIdCreditCardCreditCardIdDelete()
-
-
-### Example
-
-
-```typescript
-import {  } from '';
-import * as fs from 'fs';
-
-const configuration = .createConfiguration();
-const apiInstance = new .BillingApi(configuration);
-
-let body:.BillingApiOrganizationOrganizationIdCreditCardCreditCardIdDeleteRequest = {
-  // string | Organization ID
-  organizationId: "organizationId_example",
-  // string | Credit Card ID
-  creditCardId: "creditCardId_example",
-};
-
-apiInstance.organizationOrganizationIdCreditCardCreditCardIdDelete(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **organizationId** | [**string**] | Organization ID | defaults to undefined
- **creditCardId** | [**string**] | Credit Card ID | defaults to undefined
-
-
-### Return type
-
-**void**
-
-### Authorization
-
-[bearerAuth](README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: Not defined
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**204** | The resource was deleted successfully |  -  |
 **401** | Access token is missing or invalid |  -  |
 **403** | Access forbidden |  -  |
 **404** | Resource not found |  -  |

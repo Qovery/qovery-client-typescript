@@ -7,9 +7,9 @@ Method | HTTP request | Description
 [**createProjectSecret**](ProjectSecretApi.md#createProjectSecret) | **POST** /project/{projectId}/secret | Add a secret to the project
 [**createProjectSecretAlias**](ProjectSecretApi.md#createProjectSecretAlias) | **POST** /project/{projectId}/secret/{secretId}/alias | Create a secret alias at the project level
 [**createProjectSecretOverride**](ProjectSecretApi.md#createProjectSecretOverride) | **POST** /project/{projectId}/secret/{secretId}/override | Create a secret override at the project level
+[**deleteProjectSecret**](ProjectSecretApi.md#deleteProjectSecret) | **DELETE** /project/{projectId}/secret/{secretId} | Delete a secret from a project
 [**editProjectSecret**](ProjectSecretApi.md#editProjectSecret) | **PUT** /project/{projectId}/secret/{secretId} | Edit a secret belonging to the project
 [**listProjectSecrets**](ProjectSecretApi.md#listProjectSecrets) | **GET** /project/{projectId}/secret | List project secrets
-[**projectProjectIdSecretSecretIdDelete**](ProjectSecretApi.md#projectProjectIdSecretSecretIdDelete) | **DELETE** /project/{projectId}/secret/{secretId} | Delete a secret from a project
 
 
 # **createProjectSecret**
@@ -208,6 +208,66 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
+# **deleteProjectSecret**
+> void deleteProjectSecret()
+
+- To delete a secret you must have the project user permission - You can't delete a BUILT_IN secret - If you delete a secret having override or alias, the associated override/alias will be deleted as well  operationId: deleteProjectSecret 
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .ProjectSecretApi(configuration);
+
+let body:.ProjectSecretApiDeleteProjectSecretRequest = {
+  // string | Project ID
+  projectId: "projectId_example",
+  // string | Secret ID
+  secretId: "secretId_example",
+};
+
+apiInstance.deleteProjectSecret(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **projectId** | [**string**] | Project ID | defaults to undefined
+ **secretId** | [**string**] | Secret ID | defaults to undefined
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | The resource was deleted successfully |  -  |
+**401** | Access token is missing or invalid |  -  |
+**403** | Access forbidden |  -  |
+**404** | Resource not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 # **editProjectSecret**
 > SecretResponse editProjectSecret(secretEditRequest)
 
@@ -325,66 +385,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List project secrets |  -  |
-**401** | Access token is missing or invalid |  -  |
-**403** | Access forbidden |  -  |
-**404** | Resource not found |  -  |
-
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
-
-# **projectProjectIdSecretSecretIdDelete**
-> void projectProjectIdSecretSecretIdDelete()
-
-- To delete a secret you must have the project user permission - You can't delete a BUILT_IN secret - If you delete a secret having override or alias, the associated override/alias will be deleted as well  operationId: deleteProjectSecret 
-
-### Example
-
-
-```typescript
-import {  } from '';
-import * as fs from 'fs';
-
-const configuration = .createConfiguration();
-const apiInstance = new .ProjectSecretApi(configuration);
-
-let body:.ProjectSecretApiProjectProjectIdSecretSecretIdDeleteRequest = {
-  // string | Project ID
-  projectId: "projectId_example",
-  // string | Secret ID
-  secretId: "secretId_example",
-};
-
-apiInstance.projectProjectIdSecretSecretIdDelete(body).then((data:any) => {
-  console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **projectId** | [**string**] | Project ID | defaults to undefined
- **secretId** | [**string**] | Secret ID | defaults to undefined
-
-
-### Return type
-
-**void**
-
-### Authorization
-
-[bearerAuth](README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: Not defined
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**204** | The resource was deleted successfully |  -  |
 **401** | Access token is missing or invalid |  -  |
 **403** | Access forbidden |  -  |
 **404** | Resource not found |  -  |
