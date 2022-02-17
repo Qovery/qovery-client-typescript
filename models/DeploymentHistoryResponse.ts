@@ -1,6 +1,6 @@
 /**
- * [BETA] Qovery API
- * - Qovery is the fastest way to deploy your full-stack apps on any Cloud provider. - ℹ️ The API is in Beta and still in progress. Some endpoints are not available yet. 
+ * Qovery API
+ * - Qovery is the fastest way to deploy your full-stack apps on any Cloud provider. - ℹ️ The API is stable and still in development. 
  *
  * OpenAPI spec version: 1.0.0
  * Contact: support+api+documentation@qovery.com
