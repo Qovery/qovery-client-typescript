@@ -51,5 +51,5 @@ export class ApplicationStorageRequestStorage {
 }
 
 
-export type ApplicationStorageRequestStorageTypeEnum = "SLOW_HDD" | "HDD" | "SSD" | "FAST_SSD" ;
+export type ApplicationStorageRequestStorageTypeEnum = "FAST_SSD" ;
 
