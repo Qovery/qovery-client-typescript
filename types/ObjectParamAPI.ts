@@ -140,6 +140,7 @@ import { GitRepositoryBranchResponseList } from '../models/GitRepositoryBranchRe
 import { GitRepositoryResponse } from '../models/GitRepositoryResponse';
 import { GitRepositoryResponseList } from '../models/GitRepositoryResponseList';
 import { Healthcheck } from '../models/Healthcheck';
+import { InlineObject } from '../models/InlineObject';
 import { InstanceResponse } from '../models/InstanceResponse';
 import { InstanceResponseList } from '../models/InstanceResponseList';
 import { InviteMemberRequest } from '../models/InviteMemberRequest';
@@ -191,6 +192,7 @@ import { ProjectCurrentCostResponseList } from '../models/ProjectCurrentCostResp
 import { ProjectDeploymentRuleRequest } from '../models/ProjectDeploymentRuleRequest';
 import { ProjectDeploymentRuleResponse } from '../models/ProjectDeploymentRuleResponse';
 import { ProjectDeploymentRuleResponseList } from '../models/ProjectDeploymentRuleResponseList';
+import { ProjectProjectIdDeploymentRuleOrderProjectDeploymentRuleIdsInOrder } from '../models/ProjectProjectIdDeploymentRuleOrderProjectDeploymentRuleIdsInOrder';
 import { ProjectRequest } from '../models/ProjectRequest';
 import { ProjectResponse } from '../models/ProjectResponse';
 import { ProjectResponseList } from '../models/ProjectResponseList';
@@ -4716,13 +4718,28 @@ export interface ProjectDeploymentRuleApiGetProjectDeploymentRuleRequest {
     deploymentRuleId: string
 }
 
-export interface ProjectDeploymentRuleApiListProjectDeploymentRuleRequest {
+export interface ProjectDeploymentRuleApiListProjectDeploymentRulesRequest {
     /**
      * Project ID
      * @type string
-     * @memberof ProjectDeploymentRuleApilistProjectDeploymentRule
+     * @memberof ProjectDeploymentRuleApilistProjectDeploymentRules
      */
     projectId: string
+}
+
+export interface ProjectDeploymentRuleApiUpdateDeploymentRulesPriorityOrderRequest {
+    /**
+     * Project ID
+     * @type string
+     * @memberof ProjectDeploymentRuleApiupdateDeploymentRulesPriorityOrder
+     */
+    projectId: string
+    /**
+     * 
+     * @type InlineObject
+     * @memberof ProjectDeploymentRuleApiupdateDeploymentRulesPriorityOrder
+     */
+    inlineObject?: InlineObject
 }
 
 export class ObjectProjectDeploymentRuleApi {
@@ -4734,6 +4751,7 @@ export class ObjectProjectDeploymentRuleApi {
 
     /**
      * Create a deployment rule
+     * Create a deployment rule
      * @param param the request object
      */
     public createDeploymentRule(param: ProjectDeploymentRuleApiCreateDeploymentRuleRequest, options?: Configuration): Promise<ProjectDeploymentRuleResponse> {
@@ -4741,6 +4759,7 @@ export class ObjectProjectDeploymentRuleApi {
     }
 
     /**
+     * Delete a project deployment rule
      * Delete a project deployment rule
      * @param param the request object
      */
@@ -4750,6 +4769,7 @@ export class ObjectProjectDeploymentRuleApi {
 
     /**
      * Edit a project deployment rule
+     * Edit a project deployment rule
      * @param param the request object
      */
     public editProjectDeployemtnRule(param: ProjectDeploymentRuleApiEditProjectDeployemtnRuleRequest, options?: Configuration): Promise<ProjectDeploymentRuleResponse> {
@@ -4757,7 +4777,8 @@ export class ObjectProjectDeploymentRuleApi {
     }
 
     /**
-     * Get project deployment rule
+     * Get a project deployment rule
+     * Get a project deployment rule
      * @param param the request object
      */
     public getProjectDeploymentRule(param: ProjectDeploymentRuleApiGetProjectDeploymentRuleRequest, options?: Configuration): Promise<ProjectDeploymentRuleResponse> {
@@ -4766,10 +4787,20 @@ export class ObjectProjectDeploymentRuleApi {
 
     /**
      * List project deployment rules
+     * List project deployment rules
      * @param param the request object
      */
-    public listProjectDeploymentRule(param: ProjectDeploymentRuleApiListProjectDeploymentRuleRequest, options?: Configuration): Promise<ProjectDeploymentRuleResponseList> {
-        return this.api.listProjectDeploymentRule(param.projectId,  options).toPromise();
+    public listProjectDeploymentRules(param: ProjectDeploymentRuleApiListProjectDeploymentRulesRequest, options?: Configuration): Promise<ProjectDeploymentRuleResponseList> {
+        return this.api.listProjectDeploymentRules(param.projectId,  options).toPromise();
+    }
+
+    /**
+     * Update deployment rules priority order
+     * Update deployment rules priority order
+     * @param param the request object
+     */
+    public updateDeploymentRulesPriorityOrder(param: ProjectDeploymentRuleApiUpdateDeploymentRulesPriorityOrderRequest, options?: Configuration): Promise<void> {
+        return this.api.updateDeploymentRulesPriorityOrder(param.projectId, param.inlineObject,  options).toPromise();
     }
 
 }

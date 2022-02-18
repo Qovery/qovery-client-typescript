@@ -15,6 +15,10 @@ import { ProjectDeploymentRuleRequest } from './ProjectDeploymentRuleRequest';
 import { HttpFile } from '../http/http';
 
 export class ProjectDeploymentRuleResponse {
+    /**
+    * used to select the first deployment rule to match new created environments
+    */
+    'priorityIndex'?: number;
     'id': string;
     'createdAt': Date;
     'updatedAt'?: Date;
@@ -24,29 +28,39 @@ export class ProjectDeploymentRuleResponse {
     'name': string;
     'description'?: string;
     'mode': ProjectDeploymentRuleResponseModeEnum;
-    'cluster': string;
-    'autoDeploy'?: boolean;
+    'clusterId': string;
+    'autoDeploy': boolean;
     'autoStop': boolean;
     /**
     * specify value only if auto_stop = false
     */
-    'timezone'?: string;
+    'timezone': string;
     /**
     * specify value only if auto_stop = false
     */
-    'startTime'?: Date;
+    'startTime': Date;
     /**
     * specify value only if auto_stop = false
     */
-    'stopTime'?: Date;
+    'stopTime': Date;
     /**
     * specify value only if auto_stop = false
     */
-    'weekdays'?: Array<ProjectDeploymentRuleResponseWeekdaysEnum>;
+    'weekdays': Array<ProjectDeploymentRuleResponseWeekdaysEnum>;
+    /**
+    * wildcard pattern composed of '?' and/or '*' used to target new created environments
+    */
+    'wildcard': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "priorityIndex",
+            "baseName": "priority_index",
+            "type": "number",
+            "format": ""
+        },
         {
             "name": "id",
             "baseName": "id",
@@ -84,8 +98,8 @@ export class ProjectDeploymentRuleResponse {
             "format": ""
         },
         {
-            "name": "cluster",
-            "baseName": "cluster",
+            "name": "clusterId",
+            "baseName": "cluster_id",
             "type": "string",
             "format": "uuid"
         },
@@ -123,6 +137,12 @@ export class ProjectDeploymentRuleResponse {
             "name": "weekdays",
             "baseName": "weekdays",
             "type": "Array<ProjectDeploymentRuleResponseWeekdaysEnum>",
+            "format": ""
+        },
+        {
+            "name": "wildcard",
+            "baseName": "wildcard",
+            "type": "string",
             "format": ""
         }    ];
 

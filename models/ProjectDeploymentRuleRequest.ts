@@ -10,49 +10,42 @@
  * Do not edit the class manually.
  */
 
-import { DeploymentRuleRequest } from './DeploymentRuleRequest';
 import { HttpFile } from '../http/http';
 
 export class ProjectDeploymentRuleRequest {
-    /**
-    * specify here a wildcard based on environment name that will target new environments after their creation
-    */
-    'environmentTarget': string;
     /**
     * name is case insensitive
     */
     'name': string;
     'description'?: string;
     'mode': ProjectDeploymentRuleRequestModeEnum;
-    'cluster': string;
-    'autoDeploy'?: boolean;
+    'clusterId': string;
+    'autoDeploy': boolean;
     'autoStop': boolean;
     /**
     * specify value only if auto_stop = false
     */
-    'timezone'?: string;
+    'timezone': string;
     /**
     * specify value only if auto_stop = false
     */
-    'startTime'?: Date;
+    'startTime': Date;
     /**
     * specify value only if auto_stop = false
     */
-    'stopTime'?: Date;
+    'stopTime': Date;
     /**
     * specify value only if auto_stop = false
     */
-    'weekdays'?: Array<ProjectDeploymentRuleRequestWeekdaysEnum>;
+    'weekdays': Array<ProjectDeploymentRuleRequestWeekdaysEnum>;
+    /**
+    * wildcard pattern composed of '?' and/or '*' used to target new created environments
+    */
+    'wildcard': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "environmentTarget",
-            "baseName": "environment_target",
-            "type": "string",
-            "format": ""
-        },
         {
             "name": "name",
             "baseName": "name",
@@ -72,8 +65,8 @@ export class ProjectDeploymentRuleRequest {
             "format": ""
         },
         {
-            "name": "cluster",
-            "baseName": "cluster",
+            "name": "clusterId",
+            "baseName": "cluster_id",
             "type": "string",
             "format": "uuid"
         },
@@ -111,6 +104,12 @@ export class ProjectDeploymentRuleRequest {
             "name": "weekdays",
             "baseName": "weekdays",
             "type": "Array<ProjectDeploymentRuleRequestWeekdaysEnum>",
+            "format": ""
+        },
+        {
+            "name": "wildcard",
+            "baseName": "wildcard",
+            "type": "string",
             "format": ""
         }    ];
 

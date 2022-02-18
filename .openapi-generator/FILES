@@ -234,6 +234,7 @@ models/GitRepositoryBranchResponseList.ts
 models/GitRepositoryResponse.ts
 models/GitRepositoryResponseList.ts
 models/Healthcheck.ts
+models/InlineObject.ts
 models/InstanceResponse.ts
 models/InstanceResponseList.ts
 models/InviteMemberRequest.ts
@@ -286,6 +287,7 @@ models/ProjectCurrentCostResponseList.ts
 models/ProjectDeploymentRuleRequest.ts
 models/ProjectDeploymentRuleResponse.ts
 models/ProjectDeploymentRuleResponseList.ts
+models/ProjectProjectIdDeploymentRuleOrderProjectDeploymentRuleIdsInOrder.ts
 models/ProjectRequest.ts
 models/ProjectResponse.ts
 models/ProjectResponseList.ts

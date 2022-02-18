@@ -136,6 +136,7 @@ export * from './GitRepositoryBranchResponseList';
 export * from './GitRepositoryResponse';
 export * from './GitRepositoryResponseList';
 export * from './Healthcheck';
+export * from './InlineObject';
 export * from './InstanceResponse';
 export * from './InstanceResponseList';
 export * from './InviteMemberRequest';
@@ -187,6 +188,7 @@ export * from './ProjectCurrentCostResponseList';
 export * from './ProjectDeploymentRuleRequest';
 export * from './ProjectDeploymentRuleResponse';
 export * from './ProjectDeploymentRuleResponseList';
+export * from './ProjectProjectIdDeploymentRuleOrderProjectDeploymentRuleIdsInOrder';
 export * from './ProjectRequest';
 export * from './ProjectResponse';
 export * from './ProjectResponseList';
@@ -362,6 +364,7 @@ import { GitRepositoryBranchResponseList } from './GitRepositoryBranchResponseLi
 import { GitRepositoryResponse } from './GitRepositoryResponse';
 import { GitRepositoryResponseList } from './GitRepositoryResponseList';
 import { Healthcheck, HealthcheckProtocolEnum    } from './Healthcheck';
+import { InlineObject } from './InlineObject';
 import { InstanceResponse } from './InstanceResponse';
 import { InstanceResponseList } from './InstanceResponseList';
 import { InviteMemberRequest , InviteMemberRequestRoleEnum   } from './InviteMemberRequest';
@@ -410,9 +413,10 @@ import { PaidUsage } from './PaidUsage';
 import { PaidUsageResponse } from './PaidUsageResponse';
 import { ProjectCurrentCostResponse } from './ProjectCurrentCostResponse';
 import { ProjectCurrentCostResponseList } from './ProjectCurrentCostResponseList';
-import { ProjectDeploymentRuleRequest   , ProjectDeploymentRuleRequestModeEnum        , ProjectDeploymentRuleRequestWeekdaysEnum   } from './ProjectDeploymentRuleRequest';
-import { ProjectDeploymentRuleResponse     , ProjectDeploymentRuleResponseModeEnum        , ProjectDeploymentRuleResponseWeekdaysEnum   } from './ProjectDeploymentRuleResponse';
+import { ProjectDeploymentRuleRequest  , ProjectDeploymentRuleRequestModeEnum        , ProjectDeploymentRuleRequestWeekdaysEnum    } from './ProjectDeploymentRuleRequest';
+import { ProjectDeploymentRuleResponse      , ProjectDeploymentRuleResponseModeEnum        , ProjectDeploymentRuleResponseWeekdaysEnum    } from './ProjectDeploymentRuleResponse';
 import { ProjectDeploymentRuleResponseList } from './ProjectDeploymentRuleResponseList';
+import { ProjectProjectIdDeploymentRuleOrderProjectDeploymentRuleIdsInOrder } from './ProjectProjectIdDeploymentRuleOrderProjectDeploymentRuleIdsInOrder';
 import { ProjectRequest } from './ProjectRequest';
 import { ProjectResponse } from './ProjectResponse';
 import { ProjectResponseList } from './ProjectResponseList';
@@ -666,6 +670,7 @@ let typeMap: {[index: string]: any} = {
     "GitRepositoryResponse": GitRepositoryResponse,
     "GitRepositoryResponseList": GitRepositoryResponseList,
     "Healthcheck": Healthcheck,
+    "InlineObject": InlineObject,
     "InstanceResponse": InstanceResponse,
     "InstanceResponseList": InstanceResponseList,
     "InviteMemberRequest": InviteMemberRequest,
@@ -717,6 +722,7 @@ let typeMap: {[index: string]: any} = {
     "ProjectDeploymentRuleRequest": ProjectDeploymentRuleRequest,
     "ProjectDeploymentRuleResponse": ProjectDeploymentRuleResponse,
     "ProjectDeploymentRuleResponseList": ProjectDeploymentRuleResponseList,
+    "ProjectProjectIdDeploymentRuleOrderProjectDeploymentRuleIdsInOrder": ProjectProjectIdDeploymentRuleOrderProjectDeploymentRuleIdsInOrder,
     "ProjectRequest": ProjectRequest,
     "ProjectResponse": ProjectResponse,
     "ProjectResponseList": ProjectResponseList,

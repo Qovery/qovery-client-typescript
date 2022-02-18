@@ -141,6 +141,7 @@ import { GitRepositoryBranchResponseList } from '../models/GitRepositoryBranchRe
 import { GitRepositoryResponse } from '../models/GitRepositoryResponse';
 import { GitRepositoryResponseList } from '../models/GitRepositoryResponseList';
 import { Healthcheck } from '../models/Healthcheck';
+import { InlineObject } from '../models/InlineObject';
 import { InstanceResponse } from '../models/InstanceResponse';
 import { InstanceResponseList } from '../models/InstanceResponseList';
 import { InviteMemberRequest } from '../models/InviteMemberRequest';
@@ -192,6 +193,7 @@ import { ProjectCurrentCostResponseList } from '../models/ProjectCurrentCostResp
 import { ProjectDeploymentRuleRequest } from '../models/ProjectDeploymentRuleRequest';
 import { ProjectDeploymentRuleResponse } from '../models/ProjectDeploymentRuleResponse';
 import { ProjectDeploymentRuleResponseList } from '../models/ProjectDeploymentRuleResponseList';
+import { ProjectProjectIdDeploymentRuleOrderProjectDeploymentRuleIdsInOrder } from '../models/ProjectProjectIdDeploymentRuleOrderProjectDeploymentRuleIdsInOrder';
 import { ProjectRequest } from '../models/ProjectRequest';
 import { ProjectResponse } from '../models/ProjectResponse';
 import { ProjectResponseList } from '../models/ProjectResponseList';
@@ -5489,6 +5491,7 @@ export class ObservableProjectDeploymentRuleApi {
 
     /**
      * Create a deployment rule
+     * Create a deployment rule
      * @param projectId Project ID
      * @param projectDeploymentRuleRequest 
      */
@@ -5512,6 +5515,7 @@ export class ObservableProjectDeploymentRuleApi {
     }
 
     /**
+     * Delete a project deployment rule
      * Delete a project deployment rule
      * @param projectId Project ID
      * @param deploymentRuleId Deployment Rule ID
@@ -5537,6 +5541,7 @@ export class ObservableProjectDeploymentRuleApi {
 
     /**
      * Edit a project deployment rule
+     * Edit a project deployment rule
      * @param projectId Project ID
      * @param deploymentRuleId Deployment Rule ID
      * @param projectDeploymentRuleRequest 
@@ -5561,7 +5566,8 @@ export class ObservableProjectDeploymentRuleApi {
     }
 
     /**
-     * Get project deployment rule
+     * Get a project deployment rule
+     * Get a project deployment rule
      * @param projectId Project ID
      * @param deploymentRuleId Deployment Rule ID
      */
@@ -5586,10 +5592,11 @@ export class ObservableProjectDeploymentRuleApi {
 
     /**
      * List project deployment rules
+     * List project deployment rules
      * @param projectId Project ID
      */
-    public listProjectDeploymentRule(projectId: string, _options?: Configuration): Observable<ProjectDeploymentRuleResponseList> {
-        const requestContextPromise = this.requestFactory.listProjectDeploymentRule(projectId, _options);
+    public listProjectDeploymentRules(projectId: string, _options?: Configuration): Observable<ProjectDeploymentRuleResponseList> {
+        const requestContextPromise = this.requestFactory.listProjectDeploymentRules(projectId, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -5603,7 +5610,32 @@ export class ObservableProjectDeploymentRuleApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.listProjectDeploymentRule(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.listProjectDeploymentRules(rsp)));
+            }));
+    }
+
+    /**
+     * Update deployment rules priority order
+     * Update deployment rules priority order
+     * @param projectId Project ID
+     * @param inlineObject 
+     */
+    public updateDeploymentRulesPriorityOrder(projectId: string, inlineObject?: InlineObject, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.updateDeploymentRulesPriorityOrder(projectId, inlineObject, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateDeploymentRulesPriorityOrder(rsp)));
             }));
     }
 

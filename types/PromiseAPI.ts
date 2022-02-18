@@ -140,6 +140,7 @@ import { GitRepositoryBranchResponseList } from '../models/GitRepositoryBranchRe
 import { GitRepositoryResponse } from '../models/GitRepositoryResponse';
 import { GitRepositoryResponseList } from '../models/GitRepositoryResponseList';
 import { Healthcheck } from '../models/Healthcheck';
+import { InlineObject } from '../models/InlineObject';
 import { InstanceResponse } from '../models/InstanceResponse';
 import { InstanceResponseList } from '../models/InstanceResponseList';
 import { InviteMemberRequest } from '../models/InviteMemberRequest';
@@ -191,6 +192,7 @@ import { ProjectCurrentCostResponseList } from '../models/ProjectCurrentCostResp
 import { ProjectDeploymentRuleRequest } from '../models/ProjectDeploymentRuleRequest';
 import { ProjectDeploymentRuleResponse } from '../models/ProjectDeploymentRuleResponse';
 import { ProjectDeploymentRuleResponseList } from '../models/ProjectDeploymentRuleResponseList';
+import { ProjectProjectIdDeploymentRuleOrderProjectDeploymentRuleIdsInOrder } from '../models/ProjectProjectIdDeploymentRuleOrderProjectDeploymentRuleIdsInOrder';
 import { ProjectRequest } from '../models/ProjectRequest';
 import { ProjectResponse } from '../models/ProjectResponse';
 import { ProjectResponseList } from '../models/ProjectResponseList';
@@ -2848,6 +2850,7 @@ export class PromiseProjectDeploymentRuleApi {
 
     /**
      * Create a deployment rule
+     * Create a deployment rule
      * @param projectId Project ID
      * @param projectDeploymentRuleRequest 
      */
@@ -2857,6 +2860,7 @@ export class PromiseProjectDeploymentRuleApi {
     }
 
     /**
+     * Delete a project deployment rule
      * Delete a project deployment rule
      * @param projectId Project ID
      * @param deploymentRuleId Deployment Rule ID
@@ -2868,6 +2872,7 @@ export class PromiseProjectDeploymentRuleApi {
 
     /**
      * Edit a project deployment rule
+     * Edit a project deployment rule
      * @param projectId Project ID
      * @param deploymentRuleId Deployment Rule ID
      * @param projectDeploymentRuleRequest 
@@ -2878,7 +2883,8 @@ export class PromiseProjectDeploymentRuleApi {
     }
 
     /**
-     * Get project deployment rule
+     * Get a project deployment rule
+     * Get a project deployment rule
      * @param projectId Project ID
      * @param deploymentRuleId Deployment Rule ID
      */
@@ -2889,10 +2895,22 @@ export class PromiseProjectDeploymentRuleApi {
 
     /**
      * List project deployment rules
+     * List project deployment rules
      * @param projectId Project ID
      */
-    public listProjectDeploymentRule(projectId: string, _options?: Configuration): Promise<ProjectDeploymentRuleResponseList> {
-        const result = this.api.listProjectDeploymentRule(projectId, _options);
+    public listProjectDeploymentRules(projectId: string, _options?: Configuration): Promise<ProjectDeploymentRuleResponseList> {
+        const result = this.api.listProjectDeploymentRules(projectId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Update deployment rules priority order
+     * Update deployment rules priority order
+     * @param projectId Project ID
+     * @param inlineObject 
+     */
+    public updateDeploymentRulesPriorityOrder(projectId: string, inlineObject?: InlineObject, _options?: Configuration): Promise<void> {
+        const result = this.api.updateDeploymentRulesPriorityOrder(projectId, inlineObject, _options);
         return result.toPromise();
     }
 

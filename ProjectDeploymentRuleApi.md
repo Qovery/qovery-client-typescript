@@ -7,13 +7,15 @@ Method | HTTP request | Description
 [**createDeploymentRule**](ProjectDeploymentRuleApi.md#createDeploymentRule) | **POST** /project/{projectId}/deploymentRule | Create a deployment rule
 [**deleteProjectDeploymentRule**](ProjectDeploymentRuleApi.md#deleteProjectDeploymentRule) | **DELETE** /project/{projectId}/deploymentRule/{deploymentRuleId} | Delete a project deployment rule
 [**editProjectDeployemtnRule**](ProjectDeploymentRuleApi.md#editProjectDeployemtnRule) | **PUT** /project/{projectId}/deploymentRule/{deploymentRuleId} | Edit a project deployment rule
-[**getProjectDeploymentRule**](ProjectDeploymentRuleApi.md#getProjectDeploymentRule) | **GET** /project/{projectId}/deploymentRule/{deploymentRuleId} | Get project deployment rule
-[**listProjectDeploymentRule**](ProjectDeploymentRuleApi.md#listProjectDeploymentRule) | **GET** /project/{projectId}/deploymentRule | List project deployment rules
+[**getProjectDeploymentRule**](ProjectDeploymentRuleApi.md#getProjectDeploymentRule) | **GET** /project/{projectId}/deploymentRule/{deploymentRuleId} | Get a project deployment rule
+[**listProjectDeploymentRules**](ProjectDeploymentRuleApi.md#listProjectDeploymentRules) | **GET** /project/{projectId}/deploymentRule | List project deployment rules
+[**updateDeploymentRulesPriorityOrder**](ProjectDeploymentRuleApi.md#updateDeploymentRulesPriorityOrder) | **PUT** /project/{projectId}/deploymentRule/order | Update deployment rules priority order
 
 
 # **createDeploymentRule**
 > ProjectDeploymentRuleResponse createDeploymentRule()
 
+Create a deployment rule
 
 ### Example
 
@@ -29,7 +31,21 @@ let body:.ProjectDeploymentRuleApiCreateDeploymentRuleRequest = {
   // string | Project ID
   projectId: "projectId_example",
   // ProjectDeploymentRuleRequest (optional)
-  projectDeploymentRuleRequest: ,
+  projectDeploymentRuleRequest: {
+    name: "name_example",
+    description: "description_example",
+    mode: "PRODUCTION",
+    clusterId: "clusterId_example",
+    autoDeploy: true,
+    autoStop: true,
+    timezone: "Europe/London",
+    startTime: new Date('1970-01-01T00:00:00.00Z'),
+    stopTime: new Date('1970-01-01T00:00:00.00Z'),
+    weekdays: [
+      "MONDAY",
+    ],
+    wildcard: "wildcard_example",
+  },
 };
 
 apiInstance.createDeploymentRule(body).then((data:any) => {
@@ -74,6 +90,7 @@ Name | Type | Description  | Notes
 # **deleteProjectDeploymentRule**
 > void deleteProjectDeploymentRule()
 
+Delete a project deployment rule
 
 ### Example
 
@@ -133,6 +150,7 @@ Name | Type | Description  | Notes
 # **editProjectDeployemtnRule**
 > ProjectDeploymentRuleResponse editProjectDeployemtnRule()
 
+Edit a project deployment rule
 
 ### Example
 
@@ -150,7 +168,21 @@ let body:.ProjectDeploymentRuleApiEditProjectDeployemtnRuleRequest = {
   // string | Deployment Rule ID
   deploymentRuleId: "deploymentRuleId_example",
   // ProjectDeploymentRuleRequest (optional)
-  projectDeploymentRuleRequest: ,
+  projectDeploymentRuleRequest: {
+    name: "name_example",
+    description: "description_example",
+    mode: "PRODUCTION",
+    clusterId: "clusterId_example",
+    autoDeploy: true,
+    autoStop: true,
+    timezone: "Europe/London",
+    startTime: new Date('1970-01-01T00:00:00.00Z'),
+    stopTime: new Date('1970-01-01T00:00:00.00Z'),
+    weekdays: [
+      "MONDAY",
+    ],
+    wildcard: "wildcard_example",
+  },
 };
 
 apiInstance.editProjectDeployemtnRule(body).then((data:any) => {
@@ -190,13 +222,13 @@ Name | Type | Description  | Notes
 **401** | Access token is missing or invalid |  -  |
 **403** | Access forbidden |  -  |
 **404** | Resource not found |  -  |
-**409** | Project name within the organization is already taken |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **getProjectDeploymentRule**
 > ProjectDeploymentRuleResponse getProjectDeploymentRule()
 
+Get a project deployment rule
 
 ### Example
 
@@ -246,16 +278,17 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Get deployment rule |  -  |
+**200** | Get project deployment rule |  -  |
 **401** | Access token is missing or invalid |  -  |
 **403** | Access forbidden |  -  |
 **404** | Resource not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
-# **listProjectDeploymentRule**
-> ProjectDeploymentRuleResponseList listProjectDeploymentRule()
+# **listProjectDeploymentRules**
+> ProjectDeploymentRuleResponseList listProjectDeploymentRules()
 
+List project deployment rules
 
 ### Example
 
@@ -267,12 +300,12 @@ import * as fs from 'fs';
 const configuration = .createConfiguration();
 const apiInstance = new .ProjectDeploymentRuleApi(configuration);
 
-let body:.ProjectDeploymentRuleApiListProjectDeploymentRuleRequest = {
+let body:.ProjectDeploymentRuleApiListProjectDeploymentRulesRequest = {
   // string | Project ID
   projectId: "projectId_example",
 };
 
-apiInstance.listProjectDeploymentRule(body).then((data:any) => {
+apiInstance.listProjectDeploymentRules(body).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
 }).catch((error:any) => console.error(error));
 ```
@@ -302,7 +335,74 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Get deployment rules |  -  |
+**200** | Get project deployment rules |  -  |
+**401** | Access token is missing or invalid |  -  |
+**403** | Access forbidden |  -  |
+**404** | Resource not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **updateDeploymentRulesPriorityOrder**
+> void updateDeploymentRulesPriorityOrder()
+
+Update deployment rules priority order
+
+### Example
+
+
+```typescript
+import {  } from '';
+import * as fs from 'fs';
+
+const configuration = .createConfiguration();
+const apiInstance = new .ProjectDeploymentRuleApi(configuration);
+
+let body:.ProjectDeploymentRuleApiUpdateDeploymentRulesPriorityOrderRequest = {
+  // string | Project ID
+  projectId: "projectId_example",
+  // InlineObject (optional)
+  inlineObject: {
+    projectDeploymentRuleIdsInOrder: [
+      {
+        id: "id_example",
+      },
+    ],
+  },
+};
+
+apiInstance.updateDeploymentRulesPriorityOrder(body).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **inlineObject** | **InlineObject**|  |
+ **projectId** | [**string**] | Project ID | defaults to undefined
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Update deployment rules priority order |  -  |
+**400** | Bad request |  -  |
 **401** | Access token is missing or invalid |  -  |
 **403** | Access forbidden |  -  |
 **404** | Resource not found |  -  |
