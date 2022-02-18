@@ -16,22 +16,10 @@ import { HttpFile } from '../http/http';
 export class EnvironmentDeploymentRuleResponse {
     'autoDeploy'?: boolean;
     'autoStop'?: boolean;
-    /**
-    * specify value only if auto_stop = false
-    */
-    'timezone'?: string;
-    /**
-    * specify value only if auto_stop = false
-    */
-    'startTime'?: Date;
-    /**
-    * specify value only if auto_stop = false
-    */
-    'stopTime'?: Date;
-    /**
-    * specify value only if auto_stop = false
-    */
-    'weekdays'?: Array<EnvironmentDeploymentRuleResponseWeekdaysEnum>;
+    'timezone': string;
+    'startTime': Date;
+    'stopTime': Date;
+    'weekdays': Array<EnvironmentDeploymentRuleResponseWeekdaysEnum>;
     'id': string;
     'createdAt': Date;
     'updatedAt'?: Date;

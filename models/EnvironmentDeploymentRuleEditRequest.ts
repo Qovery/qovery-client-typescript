@@ -16,22 +16,10 @@ export class EnvironmentDeploymentRuleEditRequest {
     'autoDeploy'?: boolean;
     'autoDelete'?: boolean;
     'autoStop'?: boolean;
-    /**
-    * specify value only if auto_stop = false
-    */
-    'timezone'?: string;
-    /**
-    * specify value only if auto_stop = false
-    */
-    'startTime'?: Date;
-    /**
-    * specify value only if auto_stop = false
-    */
-    'stopTime'?: Date;
-    /**
-    * specify value only if auto_stop = false
-    */
-    'weekdays'?: Array<EnvironmentDeploymentRuleEditRequestWeekdaysEnum>;
+    'timezone': string;
+    'startTime': Date;
+    'stopTime': Date;
+    'weekdays': Array<EnvironmentDeploymentRuleEditRequestWeekdaysEnum>;
 
     static readonly discriminator: string | undefined = undefined;
 

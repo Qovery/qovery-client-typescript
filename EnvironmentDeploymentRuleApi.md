@@ -32,9 +32,9 @@ let body:.EnvironmentDeploymentRuleApiEditEnvironmentDeploymentRuleRequest = {
     autoDeploy: true,
     autoDelete: false,
     autoStop: false,
-    timezone: "Europe/London",
-    startTime: new Date('1970-01-01T00:00:00.00Z'),
-    stopTime: new Date('1970-01-01T00:00:00.00Z'),
+    timezone: "UTC",
+    startTime: new Date('1970-01-01T08:00:00Z'),
+    stopTime: new Date('1970-01-01T19:00:00Z'),
     weekdays: [
       "MONDAY",
     ],
