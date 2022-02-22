@@ -32,19 +32,20 @@ let body:.ProjectDeploymentRuleApiCreateDeploymentRuleRequest = {
   projectId: "projectId_example",
   // ProjectDeploymentRuleRequest (optional)
   projectDeploymentRuleRequest: {
-    name: "name_example",
-    description: "description_example",
-    mode: "PRODUCTION",
+    name: "project-rule",
+    description: "description project rule",
+    mode: "DEVELOPMENT",
     clusterId: "clusterId_example",
-    autoDeploy: true,
-    autoStop: true,
-    timezone: "Europe/London",
-    startTime: new Date('1970-01-01T00:00:00.00Z'),
-    stopTime: new Date('1970-01-01T00:00:00.00Z'),
+    autoDeploy: false,
+    autoStop: false,
+    autoDelete: false,
+    timezone: "UTC",
+    startTime: new Date('1970-01-01T08:00:00Z'),
+    stopTime: new Date('1970-01-01T19:00:00Z'),
     weekdays: [
       "MONDAY",
     ],
-    wildcard: "wildcard_example",
+    wildcard: "",
   },
 };
 
@@ -169,19 +170,20 @@ let body:.ProjectDeploymentRuleApiEditProjectDeployemtnRuleRequest = {
   deploymentRuleId: "deploymentRuleId_example",
   // ProjectDeploymentRuleRequest (optional)
   projectDeploymentRuleRequest: {
-    name: "name_example",
-    description: "description_example",
-    mode: "PRODUCTION",
+    name: "project-rule",
+    description: "description project rule",
+    mode: "DEVELOPMENT",
     clusterId: "clusterId_example",
-    autoDeploy: true,
-    autoStop: true,
-    timezone: "Europe/London",
-    startTime: new Date('1970-01-01T00:00:00.00Z'),
-    stopTime: new Date('1970-01-01T00:00:00.00Z'),
+    autoDeploy: false,
+    autoStop: false,
+    autoDelete: false,
+    timezone: "UTC",
+    startTime: new Date('1970-01-01T08:00:00Z'),
+    stopTime: new Date('1970-01-01T19:00:00Z'),
     weekdays: [
       "MONDAY",
     ],
-    wildcard: "wildcard_example",
+    wildcard: "",
   },
 };
 

@@ -29,23 +29,12 @@ export class ProjectDeploymentRuleResponse {
     'description'?: string;
     'mode': ProjectDeploymentRuleResponseModeEnum;
     'clusterId': string;
-    'autoDeploy': boolean;
-    'autoStop': boolean;
-    /**
-    * specify value only if auto_stop = false
-    */
+    'autoDeploy'?: boolean;
+    'autoStop'?: boolean;
+    'autoDelete'?: boolean;
     'timezone': string;
-    /**
-    * specify value only if auto_stop = false
-    */
     'startTime': Date;
-    /**
-    * specify value only if auto_stop = false
-    */
     'stopTime': Date;
-    /**
-    * specify value only if auto_stop = false
-    */
     'weekdays': Array<ProjectDeploymentRuleResponseWeekdaysEnum>;
     /**
     * wildcard pattern composed of '?' and/or '*' used to target new created environments
@@ -116,6 +105,12 @@ export class ProjectDeploymentRuleResponse {
             "format": ""
         },
         {
+            "name": "autoDelete",
+            "baseName": "auto_delete",
+            "type": "boolean",
+            "format": ""
+        },
+        {
             "name": "timezone",
             "baseName": "timezone",
             "type": "string",
@@ -155,6 +150,6 @@ export class ProjectDeploymentRuleResponse {
 }
 
 
-export type ProjectDeploymentRuleResponseModeEnum = "PRODUCTION" | "DEVELOPMENT" ;
+export type ProjectDeploymentRuleResponseModeEnum = "DEVELOPMENT" | "STAGING" | "PRODUCTION" ;
 export type ProjectDeploymentRuleResponseWeekdaysEnum = "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY" ;
 

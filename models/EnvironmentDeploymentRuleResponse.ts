@@ -16,6 +16,8 @@ import { HttpFile } from '../http/http';
 export class EnvironmentDeploymentRuleResponse {
     'autoDeploy'?: boolean;
     'autoStop'?: boolean;
+    'autoDelete'?: boolean;
+    'autoPreview'?: boolean;
     'timezone': string;
     'startTime': Date;
     'stopTime': Date;
@@ -36,6 +38,18 @@ export class EnvironmentDeploymentRuleResponse {
         {
             "name": "autoStop",
             "baseName": "auto_stop",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "autoDelete",
+            "baseName": "auto_delete",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "autoPreview",
+            "baseName": "auto_preview",
             "type": "boolean",
             "format": ""
         },
