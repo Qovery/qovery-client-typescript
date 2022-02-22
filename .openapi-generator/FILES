@@ -5,6 +5,7 @@ ApplicationActionsApi.md
 ApplicationConfigurationApi.md
 ApplicationDatabaseApi.md
 ApplicationDeploymentHistoryApi.md
+ApplicationDeploymentRuleApi.md
 ApplicationEnvironmentVariableApi.md
 ApplicationEventApi.md
 ApplicationLogsApi.md
@@ -49,6 +50,7 @@ apis/ApplicationActionsApi.ts
 apis/ApplicationConfigurationApi.ts
 apis/ApplicationDatabaseApi.ts
 apis/ApplicationDeploymentHistoryApi.ts
+apis/ApplicationDeploymentRuleApi.ts
 apis/ApplicationEnvironmentVariableApi.ts
 apis/ApplicationEventApi.ts
 apis/ApplicationLogsApi.ts
@@ -101,6 +103,9 @@ models/AccountInfoResponse.ts
 models/AliasedSecret.ts
 models/ApplicationCurrentScaleResponse.ts
 models/ApplicationDependencyRequest.ts
+models/ApplicationDeploymentRestriction.ts
+models/ApplicationDeploymentRuleEditRequest.ts
+models/ApplicationDeploymentRuleResponse.ts
 models/ApplicationEditRequest.ts
 models/ApplicationGitRepositoryRequest.ts
 models/ApplicationGitRepositoryResponse.ts

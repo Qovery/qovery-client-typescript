@@ -8,6 +8,9 @@ import { AccountInfoResponse } from '../models/AccountInfoResponse';
 import { AliasedSecret } from '../models/AliasedSecret';
 import { ApplicationCurrentScaleResponse } from '../models/ApplicationCurrentScaleResponse';
 import { ApplicationDependencyRequest } from '../models/ApplicationDependencyRequest';
+import { ApplicationDeploymentRestriction } from '../models/ApplicationDeploymentRestriction';
+import { ApplicationDeploymentRuleEditRequest } from '../models/ApplicationDeploymentRuleEditRequest';
+import { ApplicationDeploymentRuleResponse } from '../models/ApplicationDeploymentRuleResponse';
 import { ApplicationEditRequest } from '../models/ApplicationEditRequest';
 import { ApplicationGitRepositoryRequest } from '../models/ApplicationGitRepositoryRequest';
 import { ApplicationGitRepositoryResponse } from '../models/ApplicationGitRepositoryResponse';
@@ -625,6 +628,74 @@ export class ObservableApplicationDeploymentHistoryApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.listApplicationDeploymentHistory(rsp)));
+            }));
+    }
+
+}
+
+import { ApplicationDeploymentRuleApiRequestFactory, ApplicationDeploymentRuleApiResponseProcessor} from "../apis/ApplicationDeploymentRuleApi";
+export class ObservableApplicationDeploymentRuleApi {
+    private requestFactory: ApplicationDeploymentRuleApiRequestFactory;
+    private responseProcessor: ApplicationDeploymentRuleApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: ApplicationDeploymentRuleApiRequestFactory,
+        responseProcessor?: ApplicationDeploymentRuleApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new ApplicationDeploymentRuleApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new ApplicationDeploymentRuleApiResponseProcessor();
+    }
+
+    /**
+     * Edit an application deployment rule
+     * Edit an application deployment rule
+     * @param applicationId Application ID
+     * @param deploymentRuleId Deployment Rule ID
+     * @param applicationDeploymentRuleEditRequest 
+     */
+    public editApplicationDeploymentRule(applicationId: string, deploymentRuleId: string, applicationDeploymentRuleEditRequest?: ApplicationDeploymentRuleEditRequest, _options?: Configuration): Observable<ApplicationDeploymentRuleResponse> {
+        const requestContextPromise = this.requestFactory.editApplicationDeploymentRule(applicationId, deploymentRuleId, applicationDeploymentRuleEditRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.editApplicationDeploymentRule(rsp)));
+            }));
+    }
+
+    /**
+     * Get application deployment rule
+     * Get application deployment rule
+     * @param applicationId Application ID
+     */
+    public getApplicationDeploymentRule(applicationId: string, _options?: Configuration): Observable<ApplicationDeploymentRuleResponse> {
+        const requestContextPromise = this.requestFactory.getApplicationDeploymentRule(applicationId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getApplicationDeploymentRule(rsp)));
             }));
     }
 

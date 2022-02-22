@@ -3,6 +3,9 @@ export * from './AccountInfoResponse';
 export * from './AliasedSecret';
 export * from './ApplicationCurrentScaleResponse';
 export * from './ApplicationDependencyRequest';
+export * from './ApplicationDeploymentRestriction';
+export * from './ApplicationDeploymentRuleEditRequest';
+export * from './ApplicationDeploymentRuleResponse';
 export * from './ApplicationEditRequest';
 export * from './ApplicationGitRepositoryRequest';
 export * from './ApplicationGitRepositoryResponse';
@@ -231,6 +234,9 @@ import { AccountInfoResponse } from './AccountInfoResponse';
 import { AliasedSecret  , AliasedSecretScopeEnum   } from './AliasedSecret';
 import { ApplicationCurrentScaleResponse      , ApplicationCurrentScaleResponseStatusEnum    } from './ApplicationCurrentScaleResponse';
 import { ApplicationDependencyRequest } from './ApplicationDependencyRequest';
+import { ApplicationDeploymentRestriction, ApplicationDeploymentRestrictionModeEnum  , ApplicationDeploymentRestrictionTypeEnum    } from './ApplicationDeploymentRestriction';
+import { ApplicationDeploymentRuleEditRequest } from './ApplicationDeploymentRuleEditRequest';
+import { ApplicationDeploymentRuleResponse } from './ApplicationDeploymentRuleResponse';
 import { ApplicationEditRequest } from './ApplicationEditRequest';
 import { ApplicationGitRepositoryRequest } from './ApplicationGitRepositoryRequest';
 import { ApplicationGitRepositoryResponse , ApplicationGitRepositoryResponseProviderEnum            } from './ApplicationGitRepositoryResponse';
@@ -476,6 +482,8 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 let enumsMap: Set<string> = new Set<string>([
     "AliasedSecretScopeEnum",
     "ApplicationCurrentScaleResponseStatusEnum",
+    "ApplicationDeploymentRestrictionModeEnum",
+    "ApplicationDeploymentRestrictionTypeEnum",
     "ApplicationGitRepositoryResponseProviderEnum",
     "ApplicationPortRequestPortsProtocolEnum",
     "ApplicationPortResponsePortsProtocolEnum",
@@ -537,6 +545,9 @@ let typeMap: {[index: string]: any} = {
     "AliasedSecret": AliasedSecret,
     "ApplicationCurrentScaleResponse": ApplicationCurrentScaleResponse,
     "ApplicationDependencyRequest": ApplicationDependencyRequest,
+    "ApplicationDeploymentRestriction": ApplicationDeploymentRestriction,
+    "ApplicationDeploymentRuleEditRequest": ApplicationDeploymentRuleEditRequest,
+    "ApplicationDeploymentRuleResponse": ApplicationDeploymentRuleResponse,
     "ApplicationEditRequest": ApplicationEditRequest,
     "ApplicationGitRepositoryRequest": ApplicationGitRepositoryRequest,
     "ApplicationGitRepositoryResponse": ApplicationGitRepositoryResponse,

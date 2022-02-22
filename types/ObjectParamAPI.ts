@@ -7,6 +7,9 @@ import { AccountInfoResponse } from '../models/AccountInfoResponse';
 import { AliasedSecret } from '../models/AliasedSecret';
 import { ApplicationCurrentScaleResponse } from '../models/ApplicationCurrentScaleResponse';
 import { ApplicationDependencyRequest } from '../models/ApplicationDependencyRequest';
+import { ApplicationDeploymentRestriction } from '../models/ApplicationDeploymentRestriction';
+import { ApplicationDeploymentRuleEditRequest } from '../models/ApplicationDeploymentRuleEditRequest';
+import { ApplicationDeploymentRuleResponse } from '../models/ApplicationDeploymentRuleResponse';
 import { ApplicationEditRequest } from '../models/ApplicationEditRequest';
 import { ApplicationGitRepositoryRequest } from '../models/ApplicationGitRepositoryRequest';
 import { ApplicationGitRepositoryResponse } from '../models/ApplicationGitRepositoryResponse';
@@ -547,6 +550,66 @@ export class ObjectApplicationDeploymentHistoryApi {
      */
     public listApplicationDeploymentHistory(param: ApplicationDeploymentHistoryApiListApplicationDeploymentHistoryRequest, options?: Configuration): Promise<DeploymentHistoryPaginatedResponseList> {
         return this.api.listApplicationDeploymentHistory(param.applicationId, param.startId,  options).toPromise();
+    }
+
+}
+
+import { ObservableApplicationDeploymentRuleApi } from "./ObservableAPI";
+import { ApplicationDeploymentRuleApiRequestFactory, ApplicationDeploymentRuleApiResponseProcessor} from "../apis/ApplicationDeploymentRuleApi";
+
+export interface ApplicationDeploymentRuleApiEditApplicationDeploymentRuleRequest {
+    /**
+     * Application ID
+     * @type string
+     * @memberof ApplicationDeploymentRuleApieditApplicationDeploymentRule
+     */
+    applicationId: string
+    /**
+     * Deployment Rule ID
+     * @type string
+     * @memberof ApplicationDeploymentRuleApieditApplicationDeploymentRule
+     */
+    deploymentRuleId: string
+    /**
+     * 
+     * @type ApplicationDeploymentRuleEditRequest
+     * @memberof ApplicationDeploymentRuleApieditApplicationDeploymentRule
+     */
+    applicationDeploymentRuleEditRequest?: ApplicationDeploymentRuleEditRequest
+}
+
+export interface ApplicationDeploymentRuleApiGetApplicationDeploymentRuleRequest {
+    /**
+     * Application ID
+     * @type string
+     * @memberof ApplicationDeploymentRuleApigetApplicationDeploymentRule
+     */
+    applicationId: string
+}
+
+export class ObjectApplicationDeploymentRuleApi {
+    private api: ObservableApplicationDeploymentRuleApi
+
+    public constructor(configuration: Configuration, requestFactory?: ApplicationDeploymentRuleApiRequestFactory, responseProcessor?: ApplicationDeploymentRuleApiResponseProcessor) {
+        this.api = new ObservableApplicationDeploymentRuleApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Edit an application deployment rule
+     * Edit an application deployment rule
+     * @param param the request object
+     */
+    public editApplicationDeploymentRule(param: ApplicationDeploymentRuleApiEditApplicationDeploymentRuleRequest, options?: Configuration): Promise<ApplicationDeploymentRuleResponse> {
+        return this.api.editApplicationDeploymentRule(param.applicationId, param.deploymentRuleId, param.applicationDeploymentRuleEditRequest,  options).toPromise();
+    }
+
+    /**
+     * Get application deployment rule
+     * Get application deployment rule
+     * @param param the request object
+     */
+    public getApplicationDeploymentRule(param: ApplicationDeploymentRuleApiGetApplicationDeploymentRuleRequest, options?: Configuration): Promise<ApplicationDeploymentRuleResponse> {
+        return this.api.getApplicationDeploymentRule(param.applicationId,  options).toPromise();
     }
 
 }
