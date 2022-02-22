@@ -14,6 +14,10 @@ import { HttpFile } from '../http/http';
 
 export class EnvironmentEditRequest {
     'name'?: string;
+    /**
+    * PREVIEW value is reserved for preview environments only
+    */
+    'mode'?: EnvironmentEditRequestModeEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -22,6 +26,12 @@ export class EnvironmentEditRequest {
             "name": "name",
             "baseName": "name",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "mode",
+            "baseName": "mode",
+            "type": "EnvironmentEditRequestModeEnum",
             "format": ""
         }    ];
 
@@ -32,4 +42,7 @@ export class EnvironmentEditRequest {
     public constructor() {
     }
 }
+
+
+export type EnvironmentEditRequestModeEnum = "DEVELOPMENT" | "STAGING" | "PRODUCTION" | "PREVIEW" ;
 

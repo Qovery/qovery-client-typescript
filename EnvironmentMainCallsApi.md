@@ -89,6 +89,7 @@ let body:.EnvironmentMainCallsApiEditEnvironmentRequest = {
   // EnvironmentEditRequest (optional)
   environmentEditRequest: {
     name: "name_example",
+    mode: "DEVELOPMENT",
   },
 };
 

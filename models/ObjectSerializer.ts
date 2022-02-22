@@ -343,7 +343,7 @@ import { EnvironmentDatabasesCurrentMetricResponseMemory     , EnvironmentDataba
 import { EnvironmentDatabasesCurrentMetricResponseStorage     , EnvironmentDatabasesCurrentMetricResponseStorageStatusEnum   } from './EnvironmentDatabasesCurrentMetricResponseStorage';
 import { EnvironmentDeploymentRuleEditRequest      , EnvironmentDeploymentRuleEditRequestWeekdaysEnum   } from './EnvironmentDeploymentRuleEditRequest';
 import { EnvironmentDeploymentRuleResponse } from './EnvironmentDeploymentRuleResponse';
-import { EnvironmentEditRequest } from './EnvironmentEditRequest';
+import { EnvironmentEditRequest , EnvironmentEditRequestModeEnum   } from './EnvironmentEditRequest';
 import { EnvironmentLogPaginatedResponseList } from './EnvironmentLogPaginatedResponseList';
 import { EnvironmentLogResponse   , EnvironmentLogResponseStateEnum      } from './EnvironmentLogResponse';
 import { EnvironmentLogResponseList } from './EnvironmentLogResponseList';
@@ -516,6 +516,7 @@ let enumsMap: Set<string> = new Set<string>([
     "EnvironmentDatabasesCurrentMetricResponseMemoryStatusEnum",
     "EnvironmentDatabasesCurrentMetricResponseStorageStatusEnum",
     "EnvironmentDeploymentRuleEditRequestWeekdaysEnum",
+    "EnvironmentEditRequestModeEnum",
     "EnvironmentLogResponseStateEnum",
     "EnvironmentLogResponseScopeTypeEnum",
     "EnvironmentRequestModeEnum",
